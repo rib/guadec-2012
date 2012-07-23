@@ -13,11 +13,13 @@
 # 
 
 
--- [photos/2889678711_50c3e81405_b.jpg]
+-- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
 Adapting Gnome Shell into a Wayland Compositor
+<span color="#909090">Robert Bragg, Neil Roberts</span>
 
 # *** ROB ***
 #
+# 
 # The aim of this talk is to introduce you to Wayland from the compositor's
 # point of view as opposed to the client side which you will hopefully already
 # know something about if you were able to attend Robert Bradford's talk.
@@ -38,10 +40,6 @@ Adapting Gnome Shell into a Wayland Compositor
 # mean throwing the baby out with the bath water and re-writing everything from
 # scratch.
 #
-# XXX: should we do an initial demo to explain that in fact we are running the
-# presentation in gnome-shell under KMS? At FOSDEM we barely managed to demo
-# Dawati at the end.
-#
 # So, the aim of this talk actually isn't just to talk about what we did to
 # make Gnome Shell work but instead to try and introduce, at a higher level,
 # what's involved with writing any Wayland Compositor. Hopefully this
@@ -56,6 +54,7 @@ Adapting Gnome Shell into a Wayland Compositor
 # which isn't compatible with Wayland master.
 #
 # - Summary
+# - Introduce Neil and myself
 # - Aim: wayland from compositor pov
 # - Neil and I not working on Wayland fulltime but were back in February when
 #   we developed several compositors.
@@ -65,27 +64,10 @@ Adapting Gnome Shell into a Wayland Compositor
 #   hybrid compositor
 # - Dawati Shell is mutter based so natually we thought we could also try
 #   and demonstrate Gnome Shell as a hybrid too.
-# - Demo?
 # - Clarify aim of presentation is not just about Gnome Shell
 # - Proviso: rapid changes, based on 0.85
+# - Maybe say something about the backgrounds
 #
-
--- [photos/2889678711_50c3e81405_b.jpg]
-Robert Bragg
-
-# - Intel Open Source Technology Center, based in London
-# - Maintainer for the Cogl 3D graphics API
-# - Done lots of work on Clutter
-# - I've done a fair amount of work on Window managers and Graphics
-#   drivers in the past.
-
--- [photos/2889678711_50c3e81405_b.jpg]
-Neil Roberts
-# *** NEIL ***
-#
-# - Also on the visualization team in the Intel OTC.
-# - Part-maintainer of Cogl
-# - Recently got involved in the Wayland effort
 
 -- [stage-color=black] [xarch.png] [bottom-right]
 The current X
@@ -117,6 +99,23 @@ architecture
 #
 # We can totally control the display hardware in the compositor so we
 # can do whatever
+#
+# Note: Don't assume that everyone knows what "KMS" and "evdev" are
+# "Kernel Mode Setting" - a kernel interface for controlling the display hardware
+# "evdev" - another kernel interface for managing input devices
+#
+#
+
+--
+Demo
+# Careful !!!!!
+# Re-iterate that we are showing gnome-shell directly controlling the display
+# hardware and also directly getting input events from the evdev interface.
+#
+# Unfullscreen pinpoint
+# load a Weston terminal
+# Show stacking - could say something about this
+# Show moving the terminal to a different workspace
 
 -- [photos/1346915953_edab99dab8_b.jpg]
 libwayland-server
@@ -459,31 +458,74 @@ The Compositor object
 # Explain that this interface is used by clients to create new surfaces
 #
 
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#CDCD00">cogland_compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
-                                   <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">wayland_compositor_resource</span>,
-                                   <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
+-- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
+static void
+compositor_create_surface (struct wl_client *client,
+                           struct wl_resource *compositor_resource,
+                           guint32 id)
 {
-  <span color="#00CD00">CoglandComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = wayland_compositor_resource->data;
-  <span color="#00CD00">CoglandSurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (CoglandSurface);
+  MyCompositor *compositor = compositor_resource->data;
+  MySurface *surface = g_slice_new0 (MySurface);
 
   surface->compositor = compositor;
 
-  surface->wayland_surface.resource.destroy =
-    cogland_surface_resource_destroy_cb;
-  surface->wayland_surface.resource.object.id = id;
-  surface->wayland_surface.resource.object.interface = &amp;wl_surface_interface;
-  surface->wayland_surface.resource.object.implementation =
-          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;cogland_surface_interface;
-  surface->wayland_surface.resource.data = surface;
+  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
+  surface->wl_surface.resource.object.id = id;
+  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.implementation =
+          (void (**)(void)) &my_surface_interface;
+  surface->wl_surface.resource.data = surface;
 
-  wl_client_add_resource (wayland_client, &amp;surface->wayland_surface.resource);
+  wl_client_add_resource (client, &surface->wl_surface.resource);
 
-  compositor->surfaces = g_list_prepend (compositor->surfaces,
-                                         surface);
+  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
 }
 
+-- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
+static void
+compositor_create_surface (struct wl_client *client,
+                           struct wl_resource *compositor_resource,
+                           guint32 id)
+{
+  MyCompositor *compositor = compositor_resource->data;
+  MySurface *surface = g_slice_new0 (MySurface);
+
+  surface->compositor = compositor;
+
+  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
+  surface->wl_surface.resource.object.id = id;
+  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.implementation =
+          (void (**)(void)) &my_surface_interface;
+  surface->wl_surface.resource.data = surface;
+
+  wl_client_add_resource (client, &surface->wl_surface.resource);
+
+  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
+}
+
+-- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
+static void
+compositor_create_surface (struct wl_client *client,
+                           struct wl_resource *compositor_resource,
+                           guint32 id)
+{
+  MyCompositor *compositor = compositor_resource->data;
+  MySurface *surface = g_slice_new0 (MySurface);
+
+  surface->compositor = compositor;
+
+  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
+  surface->wl_surface.resource.object.id = id;
+  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.implementation =
+          (void (**)(void)) &my_surface_interface;
+  surface->wl_surface.resource.data = surface;
+
+  wl_client_add_resource (client, &surface->wl_surface.resource);
+
+  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
+}
 --  [photos/2889657735_5234d83de4_b.jpg]
 The wl_surface interface
 
