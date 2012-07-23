@@ -1,6 +1,145 @@
 #!/usr/bin/env pinpoint
 [duration=40] [black] [shading-opacity=1.0] [transition=fade-fast]
 
+
+#
+# New outline
+# -----------
+#
+#
+# Keep the new intro
+#
+# Keep the architecture overview
+#
+# Keep the demo
+#
+# libwayland-server
+# - utils for a handling the protocol in the compositor without graphics stuff
+#
+# clients in their own world
+#
+# Compositors
+# - Interfaces, Events & Requests
+#
+# - Overview of XML
+#
+# - TODO: Create a diagram
+#
+#
+# Display      ---> Object Discovery --->   
+#
+# Compositor   ---> Create Surfaces --->
+#	|
+#	 \__ Surfaces
+#	        |
+#	        \__  Buffers
+#	        |
+#	        \__  Shell Surface
+# 
+# Seat	       ---> Logically group/advertise input devices --->
+#
+# Outputs      ---> Display Hardware --->
+#
+# Data Device Manager  ---> Data Devices for C & P --->
+#
+# Shm Object
+#
+# Screensaver Obj
+#
+#----------------
+# EGL (Private)
+# 
+# wl_drm
+#
+#
+#
+# Explain the idea of "Binding" objects
+#
+#
+#  Display       |       -----> (1)   "global" event
+#                |
+#  Compositor    |
+#   \            |        (2)<------ "bind" request + id=1
+#    resource(1) |  
+#    |           
+#    resource(1) 
+#    |           
+#    resource(2) 
+#
+
+# Rendering architecture
+#
+# TODO: Create a diagram to explain the surface creation through
+# to buffer attach process.
+#
+# Compositor::create_surface
+#					EGL: create surface (Explain this creates a buffer)
+#					Render Frame
+#					SwapBuffers
+#					  \__ EGL (Private)
+#				  <---------- attach
+# Create EGL Image
+# Create GL Texture
+# Render
+
+
+# Explain Frame callbacks and why they are important for synchronizing the clients
+# with the compositor
+#
+# TODO: Create a diagram to explain the surface creation through
+# to buffer attach process.
+#
+# Compositor::create_surface
+#					EGL: create surface (Explain this creates a buffer)
+#					Render Frame
+#				        XXX Surface::"frame" (request event from compositor when finished with buffer)
+#					SwapBuffers
+#					  \__ EGL (Private)
+#				  <---------- attach
+# Create EGL Image
+# Create GL Texture
+# Render
+# Frame Callback -----------> XXX
+
+
+# GBM Intro
+#
+# Lead onto KMS
+#
+# Introduce KMS concepts with a diagram (Maybe add "Planes")
+# - High level control flow for using the KMS API
+#
+# - Btw Cogl has a KMS backend
+# 
+# TTY Handling
+#
+# XWayland
+#   Intro
+#	- Headless X server
+#	- Wayland client
+#	- Supports DRI2
+#	- Mirrors its XRandR state based on wayland Outputs
+#	- Creates a wayland surface for every top level X window
+#
+#
+# Gnome Shell
+# - Start X wayland early on so that mutter can connect immediately as the window manager
+# - Provide implementations for the global objects discussed earlier: compositor, outputs, seats etc...
+# - Avoid all use of the Clutter X11 API (E.g. Can't assume we can get an X window for the stage)
+# - Stacking stuff
+# - Adding input support, to forward events from Clutter to X11
+#	(Can use Clutter's Evdev backend)
+# - Integrate TTY handling
+# - For KMS we can rely on Cogl's KMS backend
+#
+# TODO
+# - Update to the latest Wayland protocols
+# - Implement screen saver support
+# - Implement screen shot support
+# - Adapt the gnome-control-center display settings to talk directly with mutter
+# - Provide a way to run gnome shell without root privileges
+
+
 # General comments about what we could consider changing...
 #
 # The architecture diagrams:
@@ -488,7 +627,7 @@ The Compositor object
                            <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
   <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
-  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
+  <span background="#ff0000">MySurface *surface = g_slice_new0 (MySurface);</span>
 
   surface->compositor = compositor;
 
@@ -515,6 +654,29 @@ The Compositor object
 
   surface->compositor = compositor;
 
+<span background="#ff0000">  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
+  surface->wl_surface.resource.object.id = id;
+  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
+  surface->wl_surface.resource.object.implementation =
+          (void (**)(void)) &amp;my_surface_interface;
+  surface->wl_surface.resource.data = surface;</span>
+
+  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
+
+  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
+}
+
+-- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
+                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
+                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
+{
+  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
+  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
+
+  surface->compositor = compositor;
+
   surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
   surface->wl_surface.resource.object.id = id;
   surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
@@ -522,10 +684,12 @@ The Compositor object
           (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
   surface->wl_surface.resource.data = surface;
 
-  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
+  <span background="#ff0000">wl_client_add_resource (client, &amp;surface->wl_surface.resource);</span>
 
   compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
 }
+
+
 --  [photos/2889657735_5234d83de4_b.jpg]
 The wl_surface interface
 
@@ -544,10 +708,10 @@ Handling buffer attach requests
 <i>Handling a buffer attach from a client</i>
 <tt>
 <span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">cogland_surface_attach_buffer</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
-                               <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">surface_resource</span>,
-                               <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">buffer_resource</span>,
-                               <span color="#00CD00">gint32</span> <span color="#CDCD00">dx</span>, <span color="#00CD00">gint32</span> <span color="#CDCD00">dy</span>)
+<span color="#8080FF">my_surface_attach_buffer</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
+                          <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">surface_resource</span>,
+                          <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">buffer_resource</span>,
+                          <span color="#00CD00">gint32</span> <span color="#CDCD00">dx</span>, <span color="#00CD00">gint32</span> <span color="#CDCD00">dy</span>)
 {
  <span color="#00CDCD">struct</span> <span color="#00CD00">my_surfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = surface_resource->data;
  <span color="#00CDCD">struct</span> <span color="#00CD00">my_composito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = surface->compositor;

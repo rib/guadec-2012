@@ -29,7 +29,7 @@
   ,{
   "type":"ClutterState",
   "id":"state",
-  "duration":400,
+  "duration":1,
   "transitions":[
       {
         "source":null,
