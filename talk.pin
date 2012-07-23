@@ -1,17 +1,74 @@
 #!/usr/bin/env pinpoint
 [duration=40] [black] [shading-opacity=1.0] [transition=fade-fast]
 
+# General comments about what we could consider changing...
+#
+# The architecture diagrams:
+#   - having the "Kernel" be a separate component doesn't seem quite right
+#
+# We don't really say anything about input handling?
+# - We would need to say less about something else to be able to include this
+#   though.
+#
+# 
+
+
 -- [photos/2889678711_50c3e81405_b.jpg]
-Writing a Wayland Compositor
+Adapting Gnome Shell into a Wayland Compositor
+
 # *** ROB ***
 #
-# The idea of this talk is to hopefully give some insight into writing
-# a wayland compositor based on some of our early experiences. So far
-# we've written three compositors; each progressively more capable
-# than the last and found it a good way of learning what's involved.
+# The aim of this talk is to introduce you to Wayland from the compositor's
+# point of view as opposed to the client side which you will hopefully already
+# know something about if you were able to attend Robert Bradford's talk.
 #
-# Proviso: Significant portions of what we talk about here is evolving
-# rapidly.
+# Although Neil and I aren't currently working on Wayland day to day, back in
+# February of this year we did spend some time developing several Wayland
+# compositors, each with an increasing level of complexity as we learned what
+# was involved. We were particularly interested in being able to demonstrate
+# that it was possible to adapt an existing mature X11 compositor to become a
+# hybrid Wayland compositor so that we could have an incremental path for
+# adapting our existing Netbook compositor into a Wayland compositor.
+#
+# The Netbook compositor we were working with, called Dawati Shell, is a mutter
+# based compositor like Gnome Shell and since we were ultimately successful in
+# being able to adapt Dawati Shell into a hybrid compositor it seemed only
+# natural that we also try and adapt Gnome Shell as a demonstration that that's
+# also possible and show that moving from X11 to Wayland doesn't necessarily
+# mean throwing the baby out with the bath water and re-writing everything from
+# scratch.
+#
+# XXX: should we do an initial demo to explain that in fact we are running the
+# presentation in gnome-shell under KMS? At FOSDEM we barely managed to demo
+# Dawati at the end.
+#
+# So, the aim of this talk actually isn't just to talk about what we did to
+# make Gnome Shell work but instead to try and introduce, at a higher level,
+# what's involved with writing any Wayland Compositor. Hopefully this
+# understanding can then be applied by anyone interested in taking our work
+# with Gnome Shell further but also by those that want to write there own
+# compositor from scratch or contribute to some of the existing compositors our
+# there such as Weston.
+#
+# The big proviso that you should understand here is that significant portions
+# of what we will go through are evolving rapidly and in fact since most of our
+# work was done back in February we are based on the 0.85 branch of Wayland
+# which isn't compatible with Wayland master.
+#
+# - Summary
+# - Aim: wayland from compositor pov
+# - Neil and I not working on Wayland fulltime but were back in February when
+#   we developed several compositors.
+# - Wanted to demonstrate it's possible to convert an existing, mature X11
+#   based compositor into Wayland compositor incrementally.
+# - We successfully converted our Dawati Shell Netbook compositor into a
+#   hybrid compositor
+# - Dawati Shell is mutter based so natually we thought we could also try
+#   and demonstrate Gnome Shell as a hybrid too.
+# - Demo?
+# - Clarify aim of presentation is not just about Gnome Shell
+# - Proviso: rapid changes, based on 0.85
+#
 
 -- [photos/2889678711_50c3e81405_b.jpg]
 Robert Bragg
@@ -484,7 +541,7 @@ Frame callbacks
 # rendering clients with the redraw of the compositor.
 #
 # It's quite easy to end up in a situation where the client is
-# renderering at a very high frame-rate and hogging the GPU. The
+# rendering at a very high frame-rate and hogging the GPU. The
 # compositor is then only able to render at a much lower frame-rate so
 # most of the frames of the client are dropped. The client's rendering
 # is therefore mostly redundant.
@@ -709,6 +766,7 @@ ret = ioctl(tty->fd, KDSETMODE, KD_GRAPHICS);
 
 -- [photos/bridge.jpg]
 xwayland
+
 # *** ROB ***
 #
 # Introduce that X wayland is a means to support legacy X clients
@@ -879,10 +937,11 @@ Hybrid Mutter Status
 # - Resizing: instead of the WM overriding the size of client windows,
 #   wayland clients post new buffers and the compositor just has to
 #   deal with whatever size they are.
+#   FIXME - I think there is some support for negotiation now?
 # - The compositor no longer needs to draw decorations for each client window
 #
-# Wayland clients are still somewhat side-band, not being involved in
-# window stacking for example.
+# We don't currently track wayland transient-for constraints that ensure
+# dialogs remain on top of their corresponding application window.
 
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
@@ -905,8 +964,9 @@ Where should you start?
 Cogland
 <tt>git://git.gnome.org/cogl</tt>
 
-test-window-surface (the small Clutter compositor)
-<tt>git://git.gnome.org/clutter</tt>
+
+test-wayland-surface (the small Clutter compositor)
+<tt>http://github.com/clutter-project/test-wayland-surface</tt>
 
 Our latest work is on the ‘fosdem-2012’ branches for both
 
