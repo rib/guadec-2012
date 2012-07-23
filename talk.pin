@@ -776,7 +776,12 @@ TTY handling
 -- [photos/parish.jpg]
 Ignore input to the tty
 
--- [font=Monospace 20px] [photos/parish.jpg]
+-- [font=Monospace 50px] [photos/parish.jpg]
+
+# Whenever the file descriptor for the TTY becomes ready for reading
+# we call this function which drops the data so that it won't be
+# processed by the terminal
+
 tcflush(tty->fd, TCIFLUSH);
 
 -- [photos/parish.jpg]
