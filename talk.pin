@@ -160,24 +160,24 @@ Interfaces, Events &amp; Requests
 
 
 -- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
-&lt;<span color="#0000FF">protocol</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">xserver</span><span color="#8B2252">&quot;</span>>
+&lt;<span color="#8080FF">protocol</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">xserver</span><span color="#00CD00">&quot;</span>>
 
-  &lt;<span color="#0000FF">interface</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">xserver</span><span color="#8B2252">&quot;</span> <span color="#A0522D">version</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">1</span><span color="#8B2252">&quot;</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">set_window_id</span><span color="#8B2252">&quot;</span>>
-      &lt;<span color="#0000FF">arg</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">surface</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">object</span><span color="#8B2252">&quot;</span> <span color="#A0522D">interface</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_surface</span><span color="#8B2252">&quot;</span>/>
-      &lt;<span color="#0000FF">arg</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">id</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">uint</span><span color="#8B2252">&quot;</span>/>
-    &lt;/<span color="#0000FF">request</span>>
+  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">xserver</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_window_id</span><span color="#00CD00">&quot;</span>>
+      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">object</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">interface</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span>/>
+      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">id</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">uint</span><span color="#00CD00">&quot;</span>/>
+    &lt;/<span color="#8080FF">request</span>>
 
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">client</span><span color="#8B2252">&quot;</span>>
-      &lt;<span color="#0000FF">arg</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">fd</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">fd</span><span color="#8B2252">&quot;</span>/>
-    &lt;/<span color="#0000FF">event</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">client</span><span color="#00CD00">&quot;</span>>
+      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">fd</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">fd</span><span color="#00CD00">&quot;</span>/>
+    &lt;/<span color="#8080FF">event</span>>
 
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">listen_socket</span><span color="#8B2252">&quot;</span>>
-      &lt;<span color="#0000FF">arg</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">fd</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">fd</span><span color="#8B2252">&quot;</span>/>
-    &lt;/<span color="#0000FF">event</span>>
-  &lt;/<span color="#0000FF">interface</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">listen_socket</span><span color="#00CD00">&quot;</span>>
+      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">fd</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">fd</span><span color="#00CD00">&quot;</span>/>
+    &lt;/<span color="#8080FF">event</span>>
+  &lt;/<span color="#8080FF">interface</span>>
 
-&lt;/<span color="#0000FF">protocol</span>>
+&lt;/<span color="#8080FF">protocol</span>>
 
 # Don't worry about the details of what this particular interface is for.
 #
@@ -202,11 +202,11 @@ Objects
 <i>Example of registering a new global object in a compositor</i>
 
 <tt>
-  <span color="#A020F0">if</span> (!wl_display_add_global (compositor.wayland_display,
+  <span color="#00CDCD">if</span> (!wl_display_add_global (compositor.wayland_display,
                               &amp;wl_compositor_interface,
                               &amp;compositor,
                               compositor_bind))
-    g_error (<span color="#8B2252">&quot;Failed to register wayland compositor object&quot;</span>);
+    g_error (<span color="#00CD00">&quot;Failed to register wayland compositor object&quot;</span>);
 </tt>
 
 # Explain that this is how a compositor registers an object with
@@ -229,11 +229,11 @@ Objects
 <i>This part is a callback</i>
 
 <tt>
-  <span color="#A020F0">if</span> (!wl_display_add_global (compositor.wayland_display,
+  <span color="#00CDCD">if</span> (!wl_display_add_global (compositor.wayland_display,
                               &amp;wl_compositor_interface,
                               &amp;compositor,
                               <span background="#ff0000">compositor_bind</span>))
-    g_error (<span color="#8B2252">&quot;Failed to register wayland compositor object&quot;</span>);
+    g_error (<span color="#00CD00">&quot;Failed to register wayland compositor object&quot;</span>);
 </tt>
 
 
@@ -243,13 +243,13 @@ Objects
 -- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
 <i>Implementation</i>
 <tt>
-<span color="#A020F0">static</span> <span color="#228B22">voi</span><span color="#228B22">d</span>
-<span color="#0000FF">compositor_bind</span> (<span color="#A020F0">struct</span> <span color="#228B22">wl_client</span> *<span color="#A0522D">client</span>,
-                 <span color="#228B22">void</span> *<span color="#A0522D">data</span>,
-                 <span color="#228B22">guint32</span> <span color="#A0522D">version</span>,
-                 <span color="#228B22">guint32</span> <span color="#A0522D">id</span>)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">compositor_bind</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
+                 <span color="#00CD00">void</span> *<span color="#CDCD00">data</span>,
+                 <span color="#00CD00">guint32</span> <span color="#CDCD00">version</span>,
+                 <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
-  <span color="#228B22">CoglandComposito</span><span color="#228B22">r</span> *<span color="#A0522D">compositor</span> = data;
+  <span color="#00CD00">CoglandComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = data;
 
   wl_client_add_object (client, &amp;wl_compositor_interface,
                         &amp;cogland_compositor_interface, id, compositor);
@@ -324,8 +324,8 @@ eglCreateDisplay(NativeDisplayType display)
 <i>Create a wayland display object</i>
 
 <tt>
-<span color="#A020F0">struct</span> <span color="#228B22">wl_displa</span><span color="#228B22">y</span> *<span color="#A0522D">display</span> =
-  wl_display_connect (<span color="#008B8B">NULL</span>);
+<span color="#00CDCD">struct</span> <span color="#00CD00">wl_displa</span><span color="#00CD00">y</span> *<span color="#CDCD00">display</span> =
+  wl_display_connect (<span color="#CD00CD">NULL</span>);
 </tt>
 
 # This returns an object representing the connection on the socket to
@@ -334,7 +334,7 @@ eglCreateDisplay(NativeDisplayType display)
 -- [font=28px] [photos/depot.jpg]
 <i>Bind to the wl_compositor interface</i>
 <tt>
-  <span color="#A020F0">if</span> (strcmp(interface, <span color="#8B2252">&quot;wl_compositor&quot;</span>) == 0)
+  <span color="#00CDCD">if</span> (strcmp(interface, <span color="#00CD00">&quot;wl_compositor&quot;</span>) == 0)
     d->compositor =
       wl_display_bind(display, id,
                       &amp;wl_compositor_interface);
@@ -364,10 +364,10 @@ eglCreateWindowSurface(EGLNativeWindowType)
 <i>libwayland-egl:</i>
 
 <tt>
-<span color="#A020F0">struct</span> <span color="#228B22">wl_egl_windo</span><span color="#228B22">w</span> *
-<span color="#0000FF">wl_egl_window_create</span>(<span color="#A020F0">struct</span> <span color="#228B22">wl_surface</span> *<span color="#A0522D">surface</span>,
-                     <span color="#228B22">int</span> <span color="#A0522D">width</span>,
-                     <span color="#228B22">int</span> <span color="#A0522D">height</span>);
+<span color="#00CDCD">struct</span> <span color="#00CD00">wl_egl_windo</span><span color="#00CD00">w</span> *
+<span color="#8080FF">wl_egl_window_create</span>(<span color="#00CDCD">struct</span> <span color="#00CD00">wl_surface</span> *<span color="#CDCD00">surface</span>,
+                     <span color="#00CD00">int</span> <span color="#CDCD00">width</span>,
+                     <span color="#00CD00">int</span> <span color="#CDCD00">height</span>);
 </tt>
 
 # libwayland-egl is some wayland-specific functions in the EGL implementation
@@ -402,12 +402,12 @@ Implementing some interfaces...
 Wayland outputs
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#0000FF">interface</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_output</span><span color="#8B2252">&quot;</span> <span color="#A0522D">version</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">1</span><span color="#8B2252">&quot;</span>>
-    &lt;<span color="#0000FF">enum</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">subpixel</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">enum</span>>
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">geometry</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">event</span>>
-    &lt;<span color="#0000FF">enum</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">mode</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">enum</span>>
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">mode</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">event</span>>
-  &lt;/<span color="#0000FF">interface</span>>
+  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_output</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">subpixel</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">geometry</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">mode</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">mode</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+  &lt;/<span color="#8080FF">interface</span>>
 
 # Note that this interface is stripped to just give an outline of what it deals
 # with
@@ -416,19 +416,19 @@ Wayland outputs
 Handling Output Binding..
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#A020F0">struct</span> <span color="#228B22">wl_resourc</span><span color="#228B22">e</span> *<span color="#A0522D">resource</span> =
-  wl_client_add_object (client, &amp;wl_output_interface, <span color="#008B8B">NULL</span>, id, data);
+<span color="#00CDCD">struct</span> <span color="#00CD00">wl_resourc</span><span color="#00CD00">e</span> *<span color="#CDCD00">resource</span> =
+  wl_client_add_object (client, &amp;wl_output_interface, <span color="#CD00CD">NULL</span>, id, data);
 
 wl_resource_post_event (resource,
 			WL_OUTPUT_GEOMETRY,
 			output->x, output->y,
 			output->width_mm,
 			output->height_mm,
-			0, <span color="#B22222">/* </span><span color="#B22222">subpixel: unknown </span><span color="#B22222">*/</span>
-			<span color="#8B2252">&quot;unknown&quot;</span>, <span color="#B22222">/* </span><span color="#B22222">make </span><span color="#B22222">*/</span>
-			<span color="#8B2252">&quot;unknown&quot;</span>); <span color="#B22222">/</span><span color="#B22222">* </span><span color="#B22222">model </span><span color="#B22222">*/</span>
+			0, <span color="#CDCD00">/* </span><span color="#CDCD00">subpixel: unknown </span><span color="#CDCD00">*/</span>
+			<span color="#00CD00">&quot;unknown&quot;</span>, <span color="#CDCD00">/* </span><span color="#CDCD00">make </span><span color="#CDCD00">*/</span>
+			<span color="#00CD00">&quot;unknown&quot;</span>); <span color="#CDCD00">/</span><span color="#CDCD00">* </span><span color="#CDCD00">model </span><span color="#CDCD00">*/</span>
 
-<span color="#A0522D">wl_list_for_each</span> (mode, &amp;output->mode_list, link) {
+<span color="#CDCD00">wl_list_for_each</span> (mode, &amp;output->mode_list, link) {
       wl_resource_post_event(resource,
 			     WL_OUTPUT_MODE,
 			     mode->flags,
@@ -448,11 +448,11 @@ wl_resource_post_event (resource,
 The Compositor object
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#0000FF">interface</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_compositor</span><span color="#8B2252">&quot;</span> <span color="#A0522D">version</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">1</span><span color="#8B2252">&quot;</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">create_surface</span><span color="#8B2252">&quot;</span>>
-      &lt;<span color="#0000FF">arg</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">id</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">new_id</span><span color="#8B2252">&quot;</span> <span color="#A0522D">interface</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_surface</span><span color="#8B2252">&quot;</span>/>
-    &lt;/<span color="#0000FF">request</span>>
-  &lt;/<span color="#0000FF">interface</span>>
+  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_compositor</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">create_surface</span><span color="#00CD00">&quot;</span>>
+      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">id</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">new_id</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">interface</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span>/>
+    &lt;/<span color="#8080FF">request</span>>
+  &lt;/<span color="#8080FF">interface</span>>
 
 # Remember to note that the xml snippet is a pseudo description
 
@@ -460,13 +460,13 @@ The Compositor object
 #
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#A020F0">static</span> <span color="#228B22">voi</span><span color="#228B22">d</span>
-<span color="#A0522D">cogland_compositor_create_surface</span> (<span color="#A020F0">struct</span> <span color="#228B22">wl_client</span> *<span color="#A0522D">wayland_client</span>,
-                                   <span color="#A020F0">struct</span> <span color="#228B22">wl_resource</span> *<span color="#A0522D">wayland_compositor_resource</span>,
-                                   <span color="#228B22">guint32</span> <span color="#A0522D">id</span>)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#CDCD00">cogland_compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
+                                   <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">wayland_compositor_resource</span>,
+                                   <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
-  <span color="#228B22">CoglandComposito</span><span color="#228B22">r</span> *<span color="#A0522D">compositor</span> = wayland_compositor_resource->data;
-  <span color="#228B22">CoglandSurfac</span><span color="#228B22">e</span> *<span color="#A0522D">surface</span> = g_slice_new0 (CoglandSurface);
+  <span color="#00CD00">CoglandComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = wayland_compositor_resource->data;
+  <span color="#00CD00">CoglandSurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (CoglandSurface);
 
   surface->compositor = compositor;
 
@@ -475,7 +475,7 @@ The Compositor object
   surface->wayland_surface.resource.object.id = id;
   surface->wayland_surface.resource.object.interface = &amp;wl_surface_interface;
   surface->wayland_surface.resource.object.implementation =
-          (<span color="#228B22">void</span> (**)(<span color="#228B22">void</span>)) &amp;cogland_surface_interface;
+          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;cogland_surface_interface;
   surface->wayland_surface.resource.data = surface;
 
   wl_client_add_resource (wayland_client, &amp;surface->wayland_surface.resource);
@@ -488,12 +488,12 @@ The Compositor object
 The wl_surface interface
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#0000FF">interface</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_surface</span><span color="#8B2252">&quot;</span> <span color="#A0522D">version</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">1</span><span color="#8B2252">&quot;</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">destroy</span><span color="#8B2252">&quot;</span> <span color="#A0522D">type</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">destructor</span><span color="#8B2252">&quot;</span>/>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">attach</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">damage</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">frame</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-  &lt;/<span color="#0000FF">interface</span>>
+  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">destroy</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">destructor</span><span color="#00CD00">&quot;</span>/>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">attach</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">damage</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">frame</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;/<span color="#8080FF">interface</span>>
 
 -- [photos/depot.jpg]
 Handling buffer attach requests
@@ -501,21 +501,21 @@ Handling buffer attach requests
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
 <i>Handling a buffer attach from a client</i>
 <tt>
-<span color="#A020F0">static</span> <span color="#228B22">voi</span><span color="#228B22">d</span>
-<span color="#0000FF">cogland_surface_attach_buffer</span> (<span color="#A020F0">struct</span> <span color="#228B22">wl_client</span> *<span color="#A0522D">wayland_client</span>,
-                               <span color="#A020F0">struct</span> <span color="#228B22">wl_resource</span> *<span color="#A0522D">surface_resource</span>,
-                               <span color="#A020F0">struct</span> <span color="#228B22">wl_resource</span> *<span color="#A0522D">buffer_resource</span>,
-                               <span color="#228B22">gint32</span> <span color="#A0522D">dx</span>, <span color="#228B22">gint32</span> <span color="#A0522D">dy</span>)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">cogland_surface_attach_buffer</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
+                               <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">surface_resource</span>,
+                               <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">buffer_resource</span>,
+                               <span color="#00CD00">gint32</span> <span color="#CDCD00">dx</span>, <span color="#00CD00">gint32</span> <span color="#CDCD00">dy</span>)
 {
- <span color="#A020F0">struct</span> <span color="#228B22">my_surfac</span><span color="#228B22">e</span> *<span color="#A0522D">surface</span> = surface_resource->data;
- <span color="#A020F0">struct</span> <span color="#228B22">my_composito</span><span color="#228B22">r</span> *<span color="#A0522D">compositor</span> = surface->compositor;
- <span color="#A020F0">struct</span> <span color="#228B22">wl_buffe</span><span color="#228B22">r</span> *<span color="#A0522D">buffer</span> = buffer_resource->data;
+ <span color="#00CDCD">struct</span> <span color="#00CD00">my_surfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = surface_resource->data;
+ <span color="#00CDCD">struct</span> <span color="#00CD00">my_composito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = surface->compositor;
+ <span color="#00CDCD">struct</span> <span color="#00CD00">wl_buffe</span><span color="#00CD00">r</span> *<span color="#CDCD00">buffer</span> = buffer_resource->data;
 
- <span color="#228B22">EGLImag</span><span color="#228B22">e</span> <span color="#A0522D">image</span> = eglCreateImageKHR (compositor->display, <span color="#008B8B">NULL</span>,
+ <span color="#00CD00">EGLImag</span><span color="#00CD00">e</span> <span color="#CDCD00">image</span> = eglCreateImageKHR (compositor->display, <span color="#CD00CD">NULL</span>,
                                      EGL_WAYLAND_BUFFER_WL,
-                                     buffer, <span color="#008B8B">NULL</span>);
+                                     buffer, <span color="#CD00CD">NULL</span>);
 
- <span color="#228B22">GLuin</span><span color="#228B22">t</span> <span color="#A0522D">tex</span>;
+ <span color="#00CD00">GLuin</span><span color="#00CD00">t</span> <span color="#CDCD00">tex</span>;
  glGenTextures (1, &amp;tex);
  glBindTexture (GL_TETURE_2D, tex);
  glEGLImageTargetTexture2DOES (GL_TEXTURE_2D, image);
@@ -559,9 +559,9 @@ Frame callbacks
 -- [photos/2889657735_5234d83de4_b.jpg] [font=25px]
 <i>Post frame callback-done events on paint</i>
 <tt>
-  <span color="#A020F0">while</span> (!g_queue_is_empty (&amp;compositor->frame_callbacks))
+  <span color="#00CDCD">while</span> (!g_queue_is_empty (&amp;compositor->frame_callbacks))
     {
-      <span color="#228B22">CoglandFrameCallbac</span><span color="#228B22">k</span> *<span color="#A0522D">callback</span> =
+      <span color="#00CD00">CoglandFrameCallbac</span><span color="#00CD00">k</span> *<span color="#CDCD00">callback</span> =
         g_queue_peek_head (&amp;compositor->frame_callbacks);
 
       wl_resource_post_event (&amp;callback->resource,
@@ -583,17 +583,17 @@ The wl_shell and wl_shell_surface interface
 # "get_shell_surface" request that's given a wl_surface id.
 
 -- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#0000FF">interface</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">wl_shell_surface</span><span color="#8B2252">&quot;</span> <span color="#A0522D">version</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">1</span><span color="#8B2252">&quot;</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">move</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">enum</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">resize</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">enum</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">resize</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">set_toplevel</span><span color="#8B2252">&quot;</span>/>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">set_transient</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">set_fullscreen</span><span color="#8B2252">&quot;</span>/>
-    &lt;<span color="#0000FF">request</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">set_popup</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">request</span>>
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">configure</span><span color="#8B2252">&quot;</span>> ... &lt;/<span color="#0000FF">event</span>>
-    &lt;<span color="#0000FF">event</span> <span color="#A0522D">name</span>=<span color="#8B2252">&quot;</span><span color="#8B2252">popup_done</span><span color="#8B2252">&quot;</span>/>
-  &lt;/<span color="#0000FF">interface</span>>
+  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_shell_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">move</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_toplevel</span><span color="#00CD00">&quot;</span>/>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_transient</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_fullscreen</span><span color="#00CD00">&quot;</span>/>
+    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_popup</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">configure</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">popup_done</span><span color="#00CD00">&quot;</span>/>
+  &lt;/<span color="#8080FF">interface</span>>
 
 # Explain that the wl_shell_surface interface provides some higher level
 # requests that start to relate to the varying policies of the windowing
@@ -672,18 +672,18 @@ resources = drmModeGetResources (fd);
 Look for connected connector...
 
 -- [font=Monospace 20px] [photos/river.jpg]
-  <span color="#A020F0">for</span> (i = 0; i &lt; resources->count_connectors; i++)
+  <span color="#00CDCD">for</span> (i = 0; i &lt; resources->count_connectors; i++)
     {
-      <span color="#228B22">drmModeConnecto</span><span color="#228B22">r</span> *<span color="#A0522D">connector</span> =
+      <span color="#00CD00">drmModeConnecto</span><span color="#00CD00">r</span> *<span color="#CDCD00">connector</span> =
         drmModeGetConnector (fd, resources->connectors[i]);
 
-      <span color="#A020F0">if</span> (connector &amp;&amp;
+      <span color="#00CDCD">if</span> (connector &amp;&amp;
           connector->connection == DRM_MODE_CONNECTED &amp;&amp;
           connector->count_modes > 0 &amp;&amp;
           !is_connector_excluded (connector->connector_id,
                                   excluded_connectors,
                                   n_excluded_connectors))
-        <span color="#A020F0">return</span> connector;
+        <span color="#00CDCD">return</span> connector;
       drmModeFreeConnector(connector);
     }
 -- [photos/river.jpg]
@@ -702,19 +702,19 @@ saved_crtc = drmModeGetCrtc (fd, encoder->crtc_id);
 Pick a mode...
 
 -- [font=Monospace 20px] [photos/river.jpg]
-<span color="#228B22">drmModeModeInf</span><span color="#228B22">o</span> <span color="#A0522D">mode</span> = connector->modes[0];
+<span color="#00CD00">drmModeModeInf</span><span color="#00CD00">o</span> <span color="#CDCD00">mode</span> = connector->modes[0];
 
 -- [photos/river.jpg]
 Create a KMS framebuffer handle
 
 -- [font=Monospace 20px] [photos/river.jpg]
-<span color="#228B22">uint32_</span><span color="#228B22">t</span> <span color="#A0522D">fb_id</span>;
+<span color="#00CD00">uint32_</span><span color="#00CD00">t</span> <span color="#CDCD00">fb_id</span>;
 
 handle = gbm_bo_get_handle (kms_onscreen->next_bo).u32;
 pitch = gbm_bo_get_pitch (kms_onscreen->next_bo);
 
 drmModeAddFB (fd, width, height,
-	      24 <span color="#B22222">/* </span><span color="#B22222">depth </span><span color="#B22222">*/</span>, 32 <span color="#B22222">/* </span><span color="#B22222">bpp </span><span color="#B22222">*/</span>, pitch,
+	      24 <span color="#CDCD00">/* </span><span color="#CDCD00">depth </span><span color="#CDCD00">*/</span>, 32 <span color="#CDCD00">/* </span><span color="#CDCD00">bpp </span><span color="#CDCD00">*/</span>, pitch,
 	      handle, &amp;fb_id);
 
 -- [photos/river.jpg]
@@ -722,9 +722,9 @@ Set the CRTC mode
 
 -- [font=Monospace 20px] [photos/river.jpg]
 drmModeSetCrtc (fd, encoder->crtc_id, fb_id,
-		0 <span color="#B22222">/* </span><span color="#B22222">x </span><span color="#B22222">*/</span>,
-		0 <span color="#B22222">/* </span><span color="#B22222">y </span><span color="#B22222">*/</span>,
-		connector_id, 1 <span color="#B22222">/* </span><span color="#B22222">n_connectors </span><span color="#B22222">*/</span>,
+		0 <span color="#CDCD00">/* </span><span color="#CDCD00">x </span><span color="#CDCD00">*/</span>,
+		0 <span color="#CDCD00">/* </span><span color="#CDCD00">y </span><span color="#CDCD00">*/</span>,
+		connector_id, 1 <span color="#CDCD00">/* </span><span color="#CDCD00">n_connectors </span><span color="#CDCD00">*/</span>,
 		&amp;mode);
 
 -- [photos/parish.jpg]
@@ -749,9 +749,9 @@ Handle signals for vt switching
 mode.mode = VT_PROCESS;
 mode.relsig = SIGUSR1;
 mode.acqsig = SIGUSR2;
-<span color="#A020F0">if</span> (ioctl(tty->fd, VT_SETMODE, &amp;mode) &lt; 0) {
-	g_warning (<span color="#8B2252">&quot;failed to take control of vt handling\\n&quot;</span>);
-	<span color="#A020F0">return</span> <span color="#008B8B">NULL</span>;
+<span color="#00CDCD">if</span> (ioctl(tty->fd, VT_SETMODE, &amp;mode) &lt; 0) {
+	g_warning (<span color="#00CD00">&quot;failed to take control of vt handling\\n&quot;</span>);
+	<span color="#00CDCD">return</span> <span color="#CD00CD">NULL</span>;
 }
 
 -- [photos/parish.jpg]
@@ -759,9 +759,9 @@ Enter and leave graphics mode on the tty
 
 -- [font=Monospace 20px] [photos/parish.jpg]
 ret = ioctl(tty->fd, KDSETMODE, KD_GRAPHICS);
-<span color="#A020F0">if</span> (ret) {
-	g_warning (<span color="#8B2252">&quot;failed to set KD_GRAPHICS mode on tty: %m\\n&quot;</span>);
-	<span color="#A020F0">return</span> <span color="#008B8B">NULL</span>;
+<span color="#00CDCD">if</span> (ret) {
+	g_warning (<span color="#00CD00">&quot;failed to set KD_GRAPHICS mode on tty: %m\\n&quot;</span>);
+	<span color="#00CDCD">return</span> <span color="#CD00CD">NULL</span>;
 }
 
 -- [photos/bridge.jpg]
