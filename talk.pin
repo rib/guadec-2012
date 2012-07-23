@@ -459,70 +459,70 @@ The Compositor object
 #
 
 -- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-static void
-compositor_create_surface (struct wl_client *client,
-                           struct wl_resource *compositor_resource,
-                           guint32 id)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
+                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
+                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
-  MyCompositor *compositor = compositor_resource->data;
-  MySurface *surface = g_slice_new0 (MySurface);
+  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
+  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
 
   surface->compositor = compositor;
 
   surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
   surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
   surface->wl_surface.resource.object.implementation =
-          (void (**)(void)) &my_surface_interface;
+          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
   surface->wl_surface.resource.data = surface;
 
-  wl_client_add_resource (client, &surface->wl_surface.resource);
+  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
 
   compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
 }
 
 -- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-static void
-compositor_create_surface (struct wl_client *client,
-                           struct wl_resource *compositor_resource,
-                           guint32 id)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
+                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
+                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
-  MyCompositor *compositor = compositor_resource->data;
-  MySurface *surface = g_slice_new0 (MySurface);
+  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
+  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
 
   surface->compositor = compositor;
 
   surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
   surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
   surface->wl_surface.resource.object.implementation =
-          (void (**)(void)) &my_surface_interface;
+          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
   surface->wl_surface.resource.data = surface;
 
-  wl_client_add_resource (client, &surface->wl_surface.resource);
+  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
 
   compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
 }
 
 -- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-static void
-compositor_create_surface (struct wl_client *client,
-                           struct wl_resource *compositor_resource,
-                           guint32 id)
+<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
+<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
+                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
+                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
 {
-  MyCompositor *compositor = compositor_resource->data;
-  MySurface *surface = g_slice_new0 (MySurface);
+  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
+  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
 
   surface->compositor = compositor;
 
   surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
   surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &wl_surface_interface;
+  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
   surface->wl_surface.resource.object.implementation =
-          (void (**)(void)) &my_surface_interface;
+          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
   surface->wl_surface.resource.data = surface;
 
-  wl_client_add_resource (client, &surface->wl_surface.resource);
+  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
 
   compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
 }
