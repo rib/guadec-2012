@@ -23,7 +23,7 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1118548"
-     inkscape:cx="-84.546898"
+     inkscape:cx="-82.748102"
      inkscape:cy="139.17366"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -723,7 +723,7 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
+       style="font-size:30px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
        x="342.67062"
        y="836.43018"
        id="text3529"
@@ -747,6 +747,6 @@
          sodipodi:role="line"
          x="342.67062"
          y="986.43018"
-         id="tspan3539">resource</tspan></text>
+         id="tspan3539">object</tspan></text>
   </g>
 </svg>
