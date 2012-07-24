@@ -2,23 +2,45 @@
 [duration=40] [black] [shading-opacity=1.0] [transition=fade-fast]
 
 
+# intro 3 min - Robert
+# architecture overview 2 - Neil
+# demo 2
+# libwayland-server 0.5 - Robert
+# interfaces, events, requests (In XML terms) 3min
+# global objects 3min - Neil
+# rendering architecture 4min - Robert
+# frame callbacks 2min - Robert
+# gbm, kms, tty = 5min - Neil
+# xwayland 4.5min - Robert
+# gnome shell 4min - Neil
+# todo 2min - Robert
+
+
 #
 # New outline
 # -----------
 #
 #
-# Keep the new intro
+# Keep the new intro 3 min
 #
-# Keep the architecture overview
+# Keep the architecture overview 2min
+#   - (In X terms) The window manager and compositor have been moved into the
+#     display server so we have one process that handles input devices, owns the
+#     display hardware and is responsible for managing the client window surfaces
+#     and compositing the screen.
+#   - Instead of a remote rendering protocol, clients use EGL and OpenGL to
+#     directly render into buffers that are passed to the compositor
+#   - clients in their own world, can't discover other surface or capture
+#     the events of other clients. All input events are surface relative too
+#     so clients don't have to know their absolute position on screen.
 #
-# Keep the demo
+# Keep the demo 2min
 #
-# libwayland-server
+# libwayland-server 1min
 # - utils for a handling the protocol in the compositor without graphics stuff
+# 
 #
-# clients in their own world
-#
-# Compositors
+# Compositors 6min
 # - Interfaces, Events & Requests
 #
 # - Overview of XML
@@ -53,26 +75,11 @@
 # wl_drm
 #
 #
-# XXX Neil XXX
 #
-# Explain the idea of "Binding" objects
-#
-#
-#  Display       |       -----> (1)   "global" event
-#                |
-#  Compositor    |
-#   \            |        (2)<------ "bind" request + id=1
-#    resource(1) |  
-#    |           
-#    resource(1) 
-#    |           
-#    resource(2) 
-#
-
 # XXX Robert XXX
-# Rendering architecture
+# Rendering architecture 5min
 #
-# TODO: Create a diagram to explain the surface creation through
+# TODO: Create a diagram to explain the surface creation through 
 # to buffer attach process.
 #
 # Compositor::create_surface
@@ -89,7 +96,7 @@
 # Explain Frame callbacks and why they are important for synchronizing the clients
 # with the compositor
 #
-# XXX Robert XXX
+# XXX Robert XXX 2min
 #
 # TODO: Create a diagram to explain the surface creation through
 # to buffer attach process.
@@ -107,19 +114,24 @@
 # Frame Callback -----------> XXX
 
 
-# GBM Intro
+# 5min
+# GBM + KMS + TTY
+# ===============
 #
-# XXX Neil XXX
-# Lead onto KMS
+# GBM = low level API to alloc DRM buffers, that can be rendered too & directly scanned out from by the display hardware.
 #
-# Introduce KMS concepts with a diagram (Maybe add "Planes")
-# - High level control flow for using the KMS API
+# KMS = kernel interface for controlling the display hardware
+# - Mention Cogl's KMS backend (2sec MAX!)
 #
-# - Btw Cogl has a KMS backend
+# Diagram:
+#   - Works in terms of CRTC's, Encoders, Connectors
+#   - Explain how data flows from framebuffer through CRTC -> encoder -> connector
 # 
-# TTY Handling
+# TTY
+#   - You need to put the tty in graphics mode, block input and handle switching signals
 #
-# XWayland
+#
+# XWayland 5min
 #   Intro
 #	- Headless X server
 #	- Wayland client
@@ -128,17 +140,16 @@
 #	- Creates a wayland surface for every top level X window
 #
 #
-# Gnome Shell
-# - Start X wayland early on so that mutter can connect immediately as the window manager
-# - Provide implementations for the global objects discussed earlier: compositor, outputs, seats etc...
-# - Avoid all use of the Clutter X11 API (E.g. Can't assume we can get an X window for the stage)
-# - Stacking stuff
-# - Adding input support, to forward events from Clutter to X11
+# Gnome Shell 5min
+# - We implemented all the stuff we said you have to implement! (Code mostly lives in mutter/wayland/meta-wayland.c) 0.5
+# - Start X wayland early on so that mutter can connect immediately as the window manager 1.5min
+# - Avoid all use of the Clutter X11 API (E.g. Can't assume we can get an X window for the stage) 0.3min
+# - Stacking stuff 0.2
+# - Adding input support, to forward events from Clutter to X11 0.5
 #	(Can use Clutter's Evdev backend)
-# - Integrate TTY handling
-# - For KMS we can rely on Cogl's KMS backend
 #
-# TODO
+#
+# TODO 2min
 # - Update to the latest Wayland protocols
 # - Implement screen saver support
 # - Implement screen shot support
@@ -157,12 +168,11 @@
 #
 # 
 
--- [stage-color=black] [global-objects.png] [bottom-left]
 -- [stage-color=black] [global-objects0.svg] [bottom-left]
 -- [stage-color=black] [global-objects1.svg] [bottom-left]
--- [stage-color=black] [global-objects2.svg] [bottom-left]
--- [stage-color=black] [global-objects3.svg] [bottom-left]
--- [stage-color=black] [global-objects4.svg] [bottom-left]
+-- [stage-color=black] [global-objects10.svg] [bottom-left]
+-- [stage-color=black] [global-objects20.svg] [bottom-left]
+-- [stage-color=black] [global-objects30.svg] [bottom-left]
 
 -- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
 Adapting Gnome Shell into a Wayland Compositor
@@ -181,8 +191,7 @@ Adapting Gnome Shell into a Wayland Compositor
 # maintain the Cogl 3D graphics API used by Clutter and we've also both done a
 # fair of work on Clutter itself. 
 #
-# Although Neil and I aren't currently working on Wayland day to day, back in
-# February of this year we did spend some time developing several Wayland
+# Back in February of this year we did spend some time developing several Wayland
 # compositors, each with an increasing level of complexity as we learned what
 # was involved. We were particularly interested in being able to demonstrate
 # that it was possible to adapt an existing mature X11 compositor to become a
