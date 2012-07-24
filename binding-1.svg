@@ -23,16 +23,16 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1783854"
-     inkscape:cx="375.17677"
-     inkscape:cy="550.03143"
+     inkscape:cx="554.58318"
+     inkscape:cy="380.30767"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1472"
-     inkscape:window-height="936"
-     inkscape:window-x="1"
-     inkscape:window-y="59"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1141"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
   <defs
      id="defs4">
     <marker
@@ -146,7 +146,7 @@
      inkscape:label="Layer 1">
     <path
        style="fill:none;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 240.15912,832.01963 c -28.59829,-23.3992 -37.35115,-24.07546 -71.28398,-39.03646"
+       d="M 240.15912,832.01963 C 211.56083,808.62043 201.11074,815.58174 184.9989,800.62074"
        id="path3321"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -157,18 +157,18 @@
        width="224.19051"
        id="rect3794"
        style="fill:#ffbc00;fill-opacity:1;stroke:none"
-       rx="20"
-       ry="20" />
+       rx="30"
+       ry="30" />
     <text
        sodipodi:linespacing="125%"
        id="text3796"
-       y="443.68454"
-       x="27.752205"
-       style="font-size:67.73918152000000248px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
+       y="439.68454"
+       x="37.752205"
+       style="font-size:67.73918152px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
        xml:space="preserve"><tspan
-         style="font-size:50.80438613999999831px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
-         y="443.68454"
-         x="27.752205"
+         style="font-size:50.80438614px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+         y="439.68454"
+         x="37.752205"
          id="tspan3798"
          sodipodi:role="line">Display</tspan></text>
     <path
@@ -245,48 +245,30 @@
          x="72.55912"
          y="579.91138"
          id="tspan8123">• first thing the client sees</tspan></text>
-    <rect
-       ry="20"
-       rx="20"
-       style="fill:#ffbc00;fill-opacity:1;stroke:none"
-       id="rect3185"
-       width="73.136368"
-       height="45.233311"
-       x="11.506961"
-       y="884.16968" />
-    <text
-       xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
-       x="19.206348"
-       y="915.61383"
-       id="text3187"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3189"
-         x="19.206348"
-         y="915.61383"
-         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Seat</tspan></text>
-    <rect
-       y="746.64264"
-       x="12.355579"
-       height="46.081898"
-       width="159.69548"
-       id="rect3191"
-       style="fill:#ffbc00;fill-opacity:1;stroke:none"
-       rx="20"
-       ry="20" />
-    <text
-       sodipodi:linespacing="125%"
-       id="text3193"
-       y="777.23816"
-       x="20.054968"
-       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
-       xml:space="preserve"><tspan
-         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
-         y="777.23816"
-         x="20.054968"
-         id="tspan3195"
-         sodipodi:role="line">Compositor</tspan></text>
+    <g
+       id="g3845">
+      <rect
+         ry="20"
+         rx="20"
+         style="fill:#ffbc00;fill-opacity:1;stroke:none"
+         id="rect3191"
+         width="182.60818"
+         height="50"
+         x="12.355579"
+         y="746.64264" />
+      <text
+         xml:space="preserve"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+         x="18.054968"
+         y="781.23816"
+         id="text3193"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan3195"
+           x="18.054968"
+           y="781.23816"
+           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell">Compositor</tspan></text>
+    </g>
     <text
        sodipodi:linespacing="125%"
        id="text3308"
@@ -304,5 +286,30 @@
        id="path4133"
        d="m 241.00774,859.17544 c -28.59829,23.3992 -116.2727,30.86441 -150.205529,45.82541"
        style="fill:none;stroke:#ffffff;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <g
+       id="g3840"
+       transform="translate(-10.183426,-28)">
+      <rect
+         y="934.18738"
+         x="22.539005"
+         height="50"
+         width="79.076691"
+         id="rect3834"
+         style="fill:#ffbc00;fill-opacity:1;stroke:none"
+         rx="20"
+         ry="20" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text3836"
+         y="968.7829"
+         x="28.238394"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+         xml:space="preserve"><tspan
+           style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+           y="968.7829"
+           x="28.238394"
+           id="tspan3838"
+           sodipodi:role="line">Seat</tspan></text>
+    </g>
   </g>
 </svg>
