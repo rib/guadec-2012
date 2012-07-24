@@ -363,40 +363,28 @@ Objects
 #      wl_display_bind (display, id, &wl_compositor_interface);
 #
 
--- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg] [transition=none]
-<i>This part is a callback</i>
+-- [binding-1.svg]
 
-<tt>
-  <span color="#00CDCD">if</span> (!wl_display_add_global (compositor.wayland_display,
-                              &amp;wl_compositor_interface,
-                              &amp;compositor,
-                              <span background="#ff0000">compositor_bind</span>))
-    g_error (<span color="#00CD00">&quot;Failed to register wayland compositor object&quot;</span>);
-</tt>
+# Discussing binding
 
-
-# Explain that the highlighted function will be called whenever a client
-# explicitly binds to this interface.
-
--- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
-<i>Implementation</i>
-<tt>
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">compositor_bind</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
-                 <span color="#00CD00">void</span> *<span color="#CDCD00">data</span>,
-                 <span color="#00CD00">guint32</span> <span color="#CDCD00">version</span>,
-                 <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
-{
-  <span color="#00CD00">CoglandComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = data;
-
-  wl_client_add_object (client, &amp;wl_compositor_interface,
-                        &amp;cogland_compositor_interface, id, compositor);
-}
-</tt>
+# • There is always a display object in the compositor which works
+#   like a meta object to handle the protocol details.
+#
+# • The client gets a pointer to represent the display object
+#   immediately on conneciton
+#
+# 
 
 
-# Explain that this creates a new resource on the compositor side to represent
-# the clients view of the object.
+-- [binding-2.svg]
+
+-- [binding-3.svg]
+
+-- [binding-4.svg]
+
+-- [binding-5.svg]
+
+-- [binding-6.svg]
 
 -- [photos/depot.jpg]
 The rendering architecture...
