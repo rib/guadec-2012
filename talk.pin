@@ -373,18 +373,45 @@ Objects
 # • The client gets a pointer to represent the display object
 #   immediately on conneciton
 #
-# 
-
+# • The other objects are also in the compositor
 
 -- [binding-2.svg]
 
+# • As soon as a client connects the compositor will send ‘global’
+#   events from the display object to advertise each object in turn.
+#
+# • The event contains the object id, an interface on the object and
+#   the version number of the interface
+
 -- [binding-3.svg]
+
+# .. and so on for each object
 
 -- [binding-4.svg]
 
+# • When the client sees an object it is in interest in it will send
+#   back the ‘bind’ request.
+#
+# • This contains the same information as the ‘global’ event with an
+#   additional ID number
+#
+# • The ID number is chosen by the client
+
 -- [binding-5.svg]
 
+# • The compositor creates a ‘resource’ attached to the object.
+#
+# • This stores the client's ID number so that it knows where to send
+#   any events relating to that object.
+
 -- [binding-6.svg]
+
+# • Multiple clients can bind to the same object.
+#
+# • A resource is created for each client interested in the object.
+#
+# • The ID numbers are per-client so they don't have to be unique
+#   compared to another client
 
 -- [photos/depot.jpg]
 The rendering architecture...
