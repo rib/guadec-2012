@@ -23,6 +23,7 @@
 #
 # - Overview of XML
 #
+# XXX Robert XXX
 # - TODO: Create a diagram
 #
 #
@@ -52,6 +53,7 @@
 # wl_drm
 #
 #
+# XXX Neil XXX
 #
 # Explain the idea of "Binding" objects
 #
@@ -67,6 +69,7 @@
 #    resource(2) 
 #
 
+# XXX Robert XXX
 # Rendering architecture
 #
 # TODO: Create a diagram to explain the surface creation through
@@ -86,6 +89,8 @@
 # Explain Frame callbacks and why they are important for synchronizing the clients
 # with the compositor
 #
+# XXX Robert XXX
+#
 # TODO: Create a diagram to explain the surface creation through
 # to buffer attach process.
 #
@@ -104,6 +109,7 @@
 
 # GBM Intro
 #
+# XXX Neil XXX
 # Lead onto KMS
 #
 # Introduce KMS concepts with a diagram (Maybe add "Planes")
@@ -151,6 +157,12 @@
 #
 # 
 
+-- [stage-color=black] [global-objects.png] [bottom-left]
+-- [stage-color=black] [global-objects0.svg] [bottom-left]
+-- [stage-color=black] [global-objects1.svg] [bottom-left]
+-- [stage-color=black] [global-objects2.svg] [bottom-left]
+-- [stage-color=black] [global-objects3.svg] [bottom-left]
+-- [stage-color=black] [global-objects4.svg] [bottom-left]
 
 -- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
 Adapting Gnome Shell into a Wayland Compositor
@@ -158,10 +170,16 @@ Adapting Gnome Shell into a Wayland Compositor
 
 # *** ROB ***
 #
-# 
+# Ok, Hi everyone.
+#
 # The aim of this talk is to introduce you to Wayland from the compositor's
 # point of view as opposed to the client side which you will hopefully already
 # know something about if you were able to attend Robert Bradford's talk.
+#
+# My name is Robert Bragg and this is Neil Roberts and we both work in London
+# as part of Intel's Open Source Technology Center. Together we develop and
+# maintain the Cogl 3D graphics API used by Clutter and we've also both done a
+# fair of work on Clutter itself. 
 #
 # Although Neil and I aren't currently working on Wayland day to day, back in
 # February of this year we did spend some time developing several Wayland
@@ -177,24 +195,29 @@ Adapting Gnome Shell into a Wayland Compositor
 # natural that we also try and adapt Gnome Shell as a demonstration that that's
 # also possible and show that moving from X11 to Wayland doesn't necessarily
 # mean throwing the baby out with the bath water and re-writing everything from
-# scratch.
+# scratch. We were looking at things from a product point of view where it
+# would not have been acceptable to regress the existing compositor functionality
+# we had developed up 'till date. We wanted start bringing in some advantages
+# of the Wayland architecture and define an incremental way of pushing Wayland
+# forward to the level where it could replace the need for X11 entirely.
 #
 # So, the aim of this talk actually isn't just to talk about what we did to
 # make Gnome Shell work but instead to try and introduce, at a higher level,
 # what's involved with writing any Wayland Compositor. Hopefully this
 # understanding can then be applied by anyone interested in taking our work
-# with Gnome Shell further but also by those that want to write there own
-# compositor from scratch or contribute to some of the existing compositors our
+# with Gnome Shell further but also by those that want to write their own
+# compositor from scratch or contribute to some of the existing compositors out
 # there such as Weston.
 #
-# The big proviso that you should understand here is that significant portions
-# of what we will go through are evolving rapidly and in fact since most of our
-# work was done back in February we are based on the 0.85 branch of Wayland
-# which isn't compatible with Wayland master.
+# The big proviso that you should understand here is that Wayland is still an
+# evolving technology. Although we've tried to make the content of the talk
+# reflect the state of Wayland in master, a lot of what we did was done back
+# in February and so our code is based on Wayland 0.85 which is no longer
+# compatible with the latest protocol in master.
 #
 # - Summary
+# - Aim: wayland from compositor pov vs client side (Ref: Rob Bradford)
 # - Introduce Neil and myself
-# - Aim: wayland from compositor pov
 # - Neil and I not working on Wayland fulltime but were back in February when
 #   we developed several compositors.
 # - Wanted to demonstrate it's possible to convert an existing, mature X11
