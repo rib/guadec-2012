@@ -193,7 +193,7 @@
        y="382.30008" />
     <text
        xml:space="preserve"
-       style="font-size:67.73918152px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:67.73918152000000248px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="27.752205"
        y="443.68454"
        id="text3796"
@@ -202,7 +202,7 @@
          id="tspan3798"
          x="27.752205"
          y="443.68454"
-         style="font-size:50.80438614px;fill:#000000;fill-opacity:1;stroke:none">Display</tspan></text>
+         style="font-size:50.80438613999999831px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Display</tspan></text>
     <path
        style="fill:none;stroke:#ffffff;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 515.96022,10.183425 0,749.330385"
@@ -219,7 +219,7 @@
        sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
-       style="font-size:45.2612648px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:45.26126479999999930px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="847.03369"
        y="329.0932"
        id="text3757"
@@ -229,7 +229,7 @@
          x="847.03369"
          y="329.0932">Binding</tspan></text>
     <rect
-       style="fill:#ffffff;fill-opacity:0.32986109;stroke:none"
+       style="fill:#ffffff;fill-opacity:0.32986109000000002;stroke:none"
        id="rect3761"
        width="179.05856"
        height="56.857456"
@@ -237,7 +237,7 @@
        y="287.75665" />
     <text
        xml:space="preserve"
-       style="font-size:50px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:50px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="3.3944743"
        y="332.06384"
        id="text3765"
@@ -246,15 +246,15 @@
          id="tspan3767"
          x="3.3944743"
          y="332.06384"
-         style="font-size:50px">Compositor</tspan></text>
+         style="font-size:50px;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Compositor</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text3769"
        y="332.06384"
        x="531.23535"
-       style="font-size:50px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:50px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:50px"
+         style="font-size:50px;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="332.06384"
          x="531.23535"
          id="tspan3771"
@@ -264,7 +264,7 @@
        inkscape:connector-curvature="0"
        id="path3792"
        d="m 833.56295,348.97435 -828.8891346,0"
-       style="fill:none;stroke:#ffffff;stroke-width:4.20699024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+       style="fill:none;stroke:#ffffff;stroke-width:4.20699023999999966;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     <rect
        y="479.8912"
        x="371.61084"
@@ -279,9 +279,9 @@
        id="text7492"
        y="514.90881"
        x="380.21851"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="514.90881"
          x="380.21851"
          id="tspan7494"
@@ -297,9 +297,9 @@
        id="text7504"
        y="514.90881"
        x="417.38785"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:30px"
+         style="font-size:30px;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="514.90881"
          x="417.38785"
          id="tspan7506"
@@ -312,7 +312,7 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="660.14337"
        y="514.90881"
        id="text7514"
@@ -321,7 +321,7 @@
          sodipodi:role="line"
          x="660.14337"
          y="514.90881"
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none">2</tspan></text>
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">2</tspan></text>
     <rect
        ry="18.37356"
        rx="20"
@@ -333,7 +333,7 @@
        y="546.0835" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="380.21851"
        y="581.10107"
        id="text7559"
@@ -342,7 +342,7 @@
          id="tspan7561"
          x="380.21851"
          y="581.10107"
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none">2</tspan></text>
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">2</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 4;stroke-dashoffset:0"
        d="m 408.05304,547.43401 0,48.37126"
@@ -351,7 +351,7 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="471.38785"
        y="581.10107"
        id="text7565"
@@ -360,7 +360,7 @@
          id="tspan7567"
          x="471.38785"
          y="581.10107"
-         style="font-size:30px">wl_seat</tspan></text>
+         style="font-size:30px;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">wl_seat</tspan></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -372,9 +372,9 @@
        id="text7571"
        y="581.10107"
        x="660.14337"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="581.10107"
          x="660.14337"
          sodipodi:role="line"
@@ -384,7 +384,7 @@
        id="text7615"
        y="629.64508"
        x="122.30605"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
          id="tspan7619"
          y="629.64508"
@@ -405,7 +405,7 @@
        y="681.16718" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="412.21851"
        y="716.18481"
        id="text8356"
@@ -414,7 +414,7 @@
          id="tspan8358"
          x="412.21851"
          y="716.18481"
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none">2</tspan></text>
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">2</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:12, 4;stroke-dashoffset:0"
        d="m 440.05304,682.51773 0,48.37126"
@@ -423,7 +423,7 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="449.38785"
        y="716.18481"
        id="text8362"
@@ -432,7 +432,7 @@
          id="tspan8364"
          x="449.38785"
          y="716.18481"
-         style="font-size:30px">wl_seat</tspan></text>
+         style="font-size:30px;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">wl_seat</tspan></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -444,9 +444,9 @@
        id="text8368"
        y="716.18481"
        x="588.14337"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="716.18481"
          x="588.14337"
          sodipodi:role="line"
@@ -459,7 +459,7 @@
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="636.14337"
        y="716.18481"
        id="text10631"
@@ -468,10 +468,10 @@
          sodipodi:role="line"
          x="636.14337"
          y="716.18481"
-         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none">3</tspan></text>
+         style="font-size:30px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">3</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="533.34296"
        y="629.64508"
        id="text10635"
@@ -486,7 +486,7 @@
          id="tspan10643">request with same details</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="607.9931"
        y="819.41809"
        id="text10645"
@@ -517,7 +517,7 @@
        y="884.16986" />
     <text
        xml:space="preserve"
-       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        x="19.206387"
        y="915.61401"
        id="text3187"
@@ -526,7 +526,7 @@
          id="tspan3189"
          x="19.206387"
          y="915.61401"
-         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none">Seat</tspan></text>
+         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Seat</tspan></text>
     <rect
        y="746.64282"
        x="12.355618"
@@ -541,9 +541,9 @@
        id="text3193"
        y="777.23834"
        x="20.055008"
-       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       style="font-size:25px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Cantarell;-inkscape-font-specification:Cantarell;font-stretch:normal;font-variant:normal"
        xml:space="preserve"><tspan
-         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none"
+         style="font-size:25px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:Cantarell;font-family:Cantarell;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
          y="777.23834"
          x="20.055008"
          id="tspan3195"
