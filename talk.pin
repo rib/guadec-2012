@@ -363,7 +363,7 @@ Objects
 #      wl_display_bind (display, id, &wl_compositor_interface);
 #
 
--- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
+-- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg] [transition=none]
 <i>This part is a callback</i>
 
 <tt>
@@ -877,7 +877,7 @@ resources = drmModeGetResources (fd);
 -- [photos/river.jpg]
 Look for connected connector...
 
--- [font=Monospace 20px] [photos/river.jpg]
+-- [font=Monospace 24px] [photos/river.jpg]
   <span color="#00CDCD">for</span> (i = 0; i &lt; resources->count_connectors; i++)
     {
       <span color="#00CD00">drmModeConnecto</span><span color="#00CD00">r</span> *<span color="#CDCD00">connector</span> =
@@ -895,13 +895,13 @@ Look for connected connector...
 -- [photos/river.jpg]
 Pick an encoder...
 
--- [font=Monospace 20px] [photos/river.jpg]
+-- [font=Monospace 26px] [photos/river.jpg]
 encoder = drmModeGetEncoder (fd, connector->encoders[0]);
 
 -- [photos/river.jpg]
 Save the CRTC mode
 
--- [font=Monospace 20px] [photos/river.jpg]
+-- [font=Monospace 26px] [photos/river.jpg]
 saved_crtc = drmModeGetCrtc (fd, encoder->crtc_id);
 
 -- [photos/river.jpg]

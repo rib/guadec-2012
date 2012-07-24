@@ -1,0 +1,50 @@
+[{
+  "type":"ClutterGroup",
+  "id":"actor",
+  "rotation-center-z-gravity":"center",
+  "scale-gravity":"center",
+  "children":[
+     {
+       "id":"background",
+       "type":"ClutterGroup",
+       "rotation-center-z-gravity":"center",
+       "scale-gravity":"center"
+     },
+     {
+       "type":"ClutterGroup",
+       "children":[
+     {
+       "id":"midground",
+       "type":"ClutterGroup",
+       "rotation-center-z-gravity":"center",
+       "scale-gravity":"center"
+     }]},
+     {
+       "id":"foreground",
+       "type":"ClutterGroup",
+       "rotation-center-z-gravity":"center",
+       "scale-gravity":"center"
+     }
+  ]}
+  ,{
+  "type":"ClutterState",
+  "id":"state",
+  "duration":1,
+  "transitions":[
+      {
+        "source":null,
+        "target":"pre",
+        "keys": []
+      },
+      {
+        "source":null,
+        "target":"show",
+        "keys": []
+      },
+      {
+        "source":null,
+        "target":"post",
+        "keys": []
+      }
+  ]}
+]
