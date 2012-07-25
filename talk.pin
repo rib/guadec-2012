@@ -168,12 +168,6 @@
 #
 # 
 
--- [stage-color=black] [global-objects0.svg] [bottom-left]
--- [stage-color=black] [global-objects1.svg] [bottom-left]
--- [stage-color=black] [global-objects10.svg] [bottom-left]
--- [stage-color=black] [global-objects20.svg] [bottom-left]
--- [stage-color=black] [global-objects30.svg] [bottom-left]
-
 -- [stage-color=black] [surface-create.svg] [bottom-left]
 -- [stage-color=black] [surface-create0.svg] [bottom-left]
 -- [stage-color=black] [surface-create10.svg] [bottom-left]
@@ -274,17 +268,9 @@ architecture
 
 # The main thing to point out here is that the X architecture requires
 # us to put the compositor into a separate process.
-#
-# Because the xserver doesn't know about the compositor scenegraph
-# used to render windows its currently basically infeasible to support
-# input transformations with this architecture.
-#
-# Because the compositor isn't directly responsible for display output
-# it's also very difficult to have fine grained control over what gets
-# displayed; for example compositors want to control when fullscreen
-# applications should be scanned out directly by the display hardware
-# and they also want to take full advantage of the displays overlay
-# capabilities for blending sprites, ui and video layers together.
+
+# The compositor leaves it up to the X server to handle the display
+# and pass input on to the clients.
 
 -- [stage-color=black] [wlarch.png] [bottom-left]
 The new
@@ -293,21 +279,25 @@ architecture
 # The thing to point out here is that wayland combines the compositor
 # into the server process.
 #
-# Input redirection is now trivial because the input devices and the
-# scenegraph are now owned by the same process.
+# In X terminology, the window manager and compositor are now in the
+# display server.
 #
-# We can totally control the display hardware in the compositor so we
-# can do whatever
+# There is a single process that handles input devices, owns the
+# display hardware and is responsible for managing the client window
+# surfaces and compositing the screen.
 #
-# Note: Don't assume that everyone knows what "KMS" and "evdev" are
-# "Kernel Mode Setting" - a kernel interface for controlling the display hardware
-# "evdev" - another kernel interface for managing input devices
+# There is no remote rendering protocol. Instead clients render
+# directly into buffers using EGL and OpenGL and pass the buffers to
+# the compositor.
 #
-#
+# The client's are in a world of their own. All input events are
+# relative to the client's surface. The client can't discover
+# other surfaces or see events destined for surfaces of other clients.
 
 --
 Demo
-# Careful !!!!!
+# be SUPER careful !!!!! but also quick!!
+#
 # Re-iterate that we are showing gnome-shell directly controlling the display
 # hardware and also directly getting input events from the evdev interface.
 #
@@ -389,89 +379,57 @@ Interfaces, Events &amp; Requests
 # send events to send information out to clients.
 
 -- [photos/3536874376_8faa3e977e_b.jpg]
-Objects
 
-# Explain that interfaces are implemented by objects.
-# Explain how compositors advertise objects implementing interfaces to
-# clients
-# - global objects that get advertised via events when a client first connects
+Global objects
 
--- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
-<i>Example of registering a new global object in a compositor</i>
+# A wayland compositor has a collection of global objects. The global
+# objects are used to handle toplevel events and requests between the
+# compositor and the client.
 
-<tt>
-  <span color="#00CDCD">if</span> (!wl_display_add_global (compositor.wayland_display,
-                              &amp;wl_compositor_interface,
-                              &amp;compositor,
-                              compositor_bind))
-    g_error (<span color="#00CD00">&quot;Failed to register wayland compositor object&quot;</span>);
-</tt>
+-- [stage-color=black] [global-objects0.svg] [bottom-left]
 
-# Explain that this is how a compositor registers an object with
-# libwayland-server which will result in a new event being sent to clients
-# advertising the new object.
+# The main object is the Display object. A client gets a pointer to
+# represent this object as soon as it connects.
 #
-# This example registers the global compositor object. This is the key object
-# that clients will use to create surfaces.
+# This works like a meta-object that the client can use to discover
+# the rest of the objects.
 #
-# Explain that clients can respond to that event by asking to explicitly bind
-# the interface via...
+# When a client connects the compositor will send it an event for each
+# of the other global objects so that it bind any objects it is
+# interested in.
+
+-- [stage-color=black] [global-objects1.svg] [bottom-left]
+
+# The Compositor object has a request to create new surfaces. The
+# surfaces are like windows in the X world.
+
+-- [stage-color=black] [global-objects10.svg] [bottom-left]
+
+# A seat represents a collection of input devices such as a keyboard
+# and mouse pair. The compositor can advertise multiple seats.
 #
-#E.g.
-#  if (strcmp (interface, "wl_compositor") == 0)
-#    wayland_renderer->wayland_compositor =
-#      wl_display_bind (display, id, &wl_compositor_interface);
+# The seat object will send events to clients that bind the object.
+
+-- [stage-color=black] [global-objects20.svg] [bottom-left]
+
+# The output object represents part of the compositor geometry. This
+# is a rectangle within the compositor coordinate system. Typically
+# this represents a monitor connector to the computer.
 #
+# The client listen for events on this object to learn about the
+# monitor configurations
 
--- [binding-1.svg]
+-- [stage-color=black] [global-objects30.svg] [bottom-left]
 
-# Discussing binding
-
-# • There is always a display object in the compositor which works
-#   like a meta object to handle the protocol details.
+# As part of the rendering system, there will be a private global
+# object to handle requests to create buffers.
 #
-# • The client gets a pointer to represent the display object
-#   immediately on conneciton
+# This is encapsulated under the EGL implementation used by the client
+# and server.
 #
-# • The other objects are also in the compositor
-
--- [binding-2.svg]
-
-# • As soon as a client connects the compositor will send ‘global’
-#   events from the display object to advertise each object in turn.
-#
-# • The event contains the object id, an interface on the object and
-#   the version number of the interface
-
--- [binding-3.svg]
-
-# .. and so on for each object
-
--- [binding-4.svg]
-
-# • When the client sees an object it is in interest in it will send
-#   back the ‘bind’ request.
-#
-# • This contains the same information as the ‘global’ event with an
-#   additional ID number
-#
-# • The ID number is chosen by the client
-
--- [binding-5.svg]
-
-# • The compositor creates a ‘resource’ attached to the object.
-#
-# • This stores the client's ID number so that it knows where to send
-#   any events relating to that object.
-
--- [binding-6.svg]
-
-# • Multiple clients can bind to the same object.
-#
-# • A resource is created for each client interested in the object.
-#
-# • The ID numbers are per-client so they don't have to be unique
-#   compared to another client
+# Under Mesa, this will be a wl_drm interface which has a request to
+# create a wayland buffer given an allocated DRM buffer handle. This
+# is how the results of rendering are passed to the compositor.
 
 -- [photos/depot.jpg]
 The rendering architecture...
@@ -889,166 +847,48 @@ The wl_shell and wl_shell_surface interface
 
 -- [photos/white-house.jpg]
 Owning the display
-# *** NEIL ***
+
+# Mutter is no longer relying on X to handle the display so we need to
+# do it ourselves.
+#
+# Here are the three main systems needed to make that happen.
+
+-- [photos/white-house.jpg] [font=50px] [text-align=center]
+GBM
+generic / graphics buffer manager
+
+# GBM is a low-level API to allocate DRM buffers. They can then be
+# bound to EGL and rendered to using OpenGL without having to connect
+# to an X display. The buffers are allocated within Mesa so it will do
+# the right thing to allocate a buffer that can be directly scanned
+# out from.
+
+-- [kms.png] [top] [font=50px] [text-align=center]
+KMS
+Kernel Mode Setting
+
+# KMS is "Kernel Mode Setting"
+#
+# It is a kernel interface used to control the display hardware.
+#
+# Data flows from the CRTC to the encoder to the connector.
+#
+# You can use the library to pick and configure the CRTC,encoder and connector.
+#
+# Cogl has a backend to do most of the work in setting up GBM buffers
+# and handling KMS.
 
 -- [photos/white-house.jpg]
-libgbm
+TTY
+
+# You need to control the TTY
 #
-#Makes allocating drm buffers easy
-
--- [font=Monospace 40px] [photos/white-house.jpg]
-gbm_create_device()
-#
-# Get an object representing the gbm state.
-#
-# Takes the DRI fd
--- [font=Monospace 40px] [photos/white-house.jpg]
-eglGetDisplay() with gbm device
-# We can use the result from gbm_create_device as an
-# EGLNativeDisplayType to create an EGL display.
--- [font=Monospace 40px] [photos/white-house.jpg]
-struct gbm_surface
-
-#Explain that a gbm surface is just a swap-chain of buffers but
-#there's nothing KMS specific about a gbm surface
-#
-#CAVEAT: This api is in flux!
-#Credit Ander Conselvan de Oleveira for these patches
-
--- [font=Monospace 40px] [photos/white-house.jpg]
-struct gbm_surface *gbm_surface_create()
-
--- [font=Monospace 40px] [photos/white-house.jpg]
-eglCreateWindowSurface() with gbm_surface
-# We can use the gbm_surface as an EGLNativeWindowType
-
--- [font=Monospace 40px] [photos/white-house.jpg]
-eglSwapBuffers()
-# Once we've got a surface we can render as normal and then use
-# eglSwapBuffers to swap the gbm buffers handled by the gbm surface.
--- [font=Monospace 40px] [photos/white-house.jpg]
-gbm_surface_lock_front_buffer()
-gbm_surface_release_buffer()
-
-# Used to be named gbm_surface_get/release_bo()
-
-# We can use these two functions to get access to the current front
-# buffer as a gbm_buffer. To present this will we use KMS... (over to
-# Rob)
-
--- [photos/river.jpg]
-Kernel Mode Setting Taster
-# *** ROB ***
-#
--- [photos/river.jpg]
-Connectors, Encoders &amp; CRTCs
-
--- [photos/river.jpg]
-Query the KMS resources...
-
--- [font=Monospace 20px] [photos/river.jpg]
-resources = drmModeGetResources (fd);
-
--- [photos/river.jpg]
-Look for connected connector...
-
--- [font=Monospace 24px] [photos/river.jpg]
-  <span color="#00CDCD">for</span> (i = 0; i &lt; resources->count_connectors; i++)
-    {
-      <span color="#00CD00">drmModeConnecto</span><span color="#00CD00">r</span> *<span color="#CDCD00">connector</span> =
-        drmModeGetConnector (fd, resources->connectors[i]);
-
-      <span color="#00CDCD">if</span> (connector &amp;&amp;
-          connector->connection == DRM_MODE_CONNECTED &amp;&amp;
-          connector->count_modes > 0 &amp;&amp;
-          !is_connector_excluded (connector->connector_id,
-                                  excluded_connectors,
-                                  n_excluded_connectors))
-        <span color="#00CDCD">return</span> connector;
-      drmModeFreeConnector(connector);
-    }
--- [photos/river.jpg]
-Pick an encoder...
-
--- [font=Monospace 26px] [photos/river.jpg]
-encoder = drmModeGetEncoder (fd, connector->encoders[0]);
-
--- [photos/river.jpg]
-Save the CRTC mode
-
--- [font=Monospace 26px] [photos/river.jpg]
-saved_crtc = drmModeGetCrtc (fd, encoder->crtc_id);
-
--- [photos/river.jpg]
-Pick a mode...
-
--- [font=Monospace 20px] [photos/river.jpg]
-<span color="#00CD00">drmModeModeInf</span><span color="#00CD00">o</span> <span color="#CDCD00">mode</span> = connector->modes[0];
-
--- [photos/river.jpg]
-Create a KMS framebuffer handle
-
--- [font=Monospace 20px] [photos/river.jpg]
-<span color="#00CD00">uint32_</span><span color="#00CD00">t</span> <span color="#CDCD00">fb_id</span>;
-
-handle = gbm_bo_get_handle (kms_onscreen->next_bo).u32;
-pitch = gbm_bo_get_pitch (kms_onscreen->next_bo);
-
-drmModeAddFB (fd, width, height,
-	      24 <span color="#CDCD00">/* </span><span color="#CDCD00">depth </span><span color="#CDCD00">*/</span>, 32 <span color="#CDCD00">/* </span><span color="#CDCD00">bpp </span><span color="#CDCD00">*/</span>, pitch,
-	      handle, &amp;fb_id);
-
--- [photos/river.jpg]
-Set the CRTC mode
-
--- [font=Monospace 20px] [photos/river.jpg]
-drmModeSetCrtc (fd, encoder->crtc_id, fb_id,
-		0 <span color="#CDCD00">/* </span><span color="#CDCD00">x </span><span color="#CDCD00">*/</span>,
-		0 <span color="#CDCD00">/* </span><span color="#CDCD00">y </span><span color="#CDCD00">*/</span>,
-		connector_id, 1 <span color="#CDCD00">/* </span><span color="#CDCD00">n_connectors </span><span color="#CDCD00">*/</span>,
-		&amp;mode);
-
--- [photos/parish.jpg]
-TTY handling
-# *** NEIL ***
-#
--- [photos/parish.jpg]
-Ignore input to the tty
-
--- [font=Monospace 50px] [photos/parish.jpg]
-
-# Whenever the file descriptor for the TTY becomes ready for reading
-# we call this function which drops the data so that it won't be
-# processed by the terminal
-
-tcflush(tty->fd, TCIFLUSH);
-
--- [photos/parish.jpg]
-Handle signals for vt switching
-
-# - Close evdev devices
-# - Stop rendering
-# - Set DRM master mode
-# - Enter and leave graphics mode
-
--- [font=Monospace 20px] [photos/parish.jpg]
-mode.mode = VT_PROCESS;
-mode.relsig = SIGUSR1;
-mode.acqsig = SIGUSR2;
-<span color="#00CDCD">if</span> (ioctl(tty->fd, VT_SETMODE, &amp;mode) &lt; 0) {
-	g_warning (<span color="#00CD00">&quot;failed to take control of vt handling\\n&quot;</span>);
-	<span color="#00CDCD">return</span> <span color="#CD00CD">NULL</span>;
-}
-
--- [photos/parish.jpg]
-Enter and leave graphics mode on the tty
-
--- [font=Monospace 20px] [photos/parish.jpg]
-ret = ioctl(tty->fd, KDSETMODE, KD_GRAPHICS);
-<span color="#00CDCD">if</span> (ret) {
-	g_warning (<span color="#00CD00">&quot;failed to set KD_GRAPHICS mode on tty: %m\\n&quot;</span>);
-	<span color="#00CDCD">return</span> <span color="#CD00CD">NULL</span>;
-}
+# • Put the tty in graphics mode.
+# • Listen for signals to be notified when the user switches VT to drop
+#   DRM master mode and switch back to to text mode
+# • You need to block input to the TTY. Otherwise everything you type
+#   in the compositor will also by typed into the login screen of the
+#   VT underneath.
 
 -- [photos/bridge.jpg]
 xwayland
@@ -1188,46 +1028,77 @@ Sync X windows position to screen
 # they don't position pop up menus offscreen or crossing over multiple
 # screens.
 
+-- [photos/bridge.jpg]
+Gnome Shell
+
+-- [photos/bridge.jpg] [text-align=center]
+Gnome Shell
+<span font="30px">
+We've implemented most of the core things
+mentioned already. Code is available on the wip/wayland
+branches of Mutter and Gnome Shell</span>
+
+# We've implemented most of the bits we've already mentioned as you saw
+# in the demo.
+#
+# KMS is working, the necessary global objects are implemented and
+# input events are forwarded
+
+-- [photos/bridge.jpg] [text-align=center]
+Gnome Shell
+
+<span font="30px">Mutter is still an X client</span>
+
+# Mutter and Gnome Shell are still running as X clients.
+#
+# Mutter still connects to the X server as the window manager and
+# still does most of the window positioning via X calls. It also
+# receives most of the events through X.
+#
+# Therefore we need to start xwayland as pretty much the first thing
+# we do.
+
+-- [photos/bridge.jpg] [text-align=center]
+Gnome Shell
+
+<span font="30px">but it's not using the Clutter X11 backend</span>
+
+# Although Mutter is an X client, Clutter itself is not using X.
+#
+# Therefore Mutter can't use any Clutter X API such as getting the
+# Window ID for the stage.
+
+-- [photos/bridge.jpg] [text-align=center]
+Gnome Shell
+
+<span font="30px">Window stacking</span>
+
+# Rob's got the window stacking between X clients and Wayland clients to work.
+#
+# There's some quite fiddly details here because the existing stacking
+# code tries to work in terms of keeping the stacking in sync with the
+# X server's representation of the stack.
+#
+# Of course for Wayland surfaces there is no X window.
+
+-- [photos/bridge.jpg] [text-align=center]
+Gnome Shell
+
+<span font="30px">Input support</span>
+
+# Input events are forwarded on to the Wayland clients
+#
+# This includes the xwayland client.
+#
+# The events are received from Clutter which gets them from evdev.
+# Mutter then forwards them to the right surface.
+#
+# X events can them come back to Mutter. This is way too complicated
+# so it would be nice to get Mutter to only use Clutter events for
+# input
+
 -- [photos/waylnad-street.jpg] [bottom]
-Our own compositors...
-# *** NEIL ***
-#
-
--- [photos/cogland.png]
-Cogland: A small Cogl based compositor
-
-# Simple mini compositor directly written using the Cogl API
-#
-# Just supports displaying buffers. No input or window management.
-
-
--- [photos/test-wayland-surface.png]
-A small Clutter based compositor
-
-# Explain about implementing the wl_input_device interface
-
--- [photos/dawati-wayland.png]
-Hybrid Mutter Status
-
-# Introduce what mutter is; GNOME/X compositor framework for writing
-# Clutter based compositors.
-
-# Summarize some of the mutter specifics
-#   - We make MetaWindows + MetaWindowActors and MetaShapedTextures
-#     just as is done for X windows
-
-# Explain that in general the ways in which a hybrid compositor gets
-# developed is going to vary a lot between code bases Some differences
-# with how X and wayland clients are dealt with include
-#
-# - Resizing: instead of the WM overriding the size of client windows,
-#   wayland clients post new buffers and the compositor just has to
-#   deal with whatever size they are.
-#   FIXME - I think there is some support for negotiation now?
-# - The compositor no longer needs to draw decorations for each client window
-#
-# We don't currently track wayland transient-for constraints that ensure
-# dialogs remain on top of their corresponding application window.
+TODO
 
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
