@@ -168,21 +168,6 @@
 #
 # 
 
--- [stage-color=black] [surface-create.svg] [bottom-left]
--- [stage-color=black] [surface-create0.svg] [bottom-left]
--- [stage-color=black] [surface-create10.svg] [bottom-left]
--- [stage-color=black] [surface-create20.svg] [bottom-left]
--- [stage-color=black] [surface-create30.svg] [bottom-left]
--- [stage-color=black] [surface-create40.svg] [bottom-left]
--- [stage-color=black] [surface-create50.svg] [bottom-left]
--- [stage-color=black] [surface-create60.svg] [bottom-left]
--- [stage-color=black] [surface-create70.svg] [bottom-left]
--- [stage-color=black] [surface-create80.svg] [bottom-left]
--- [stage-color=black] [surface-create90.svg] [bottom-left]
--- [stage-color=black] [surface-create100.svg] [bottom-left]
-
--- [stage-color=black] [sync-frame.svg] [bottom-left]
-
 -- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
 Adapting Gnome Shell into a Wayland Compositor
 <span color="#909090">Robert Bragg, Neil Roberts</span>
@@ -378,9 +363,14 @@ Interfaces, Events &amp; Requests
 # sense for a cross process IPC protocol, but instead compositors can
 # send events to send information out to clients.
 
--- [photos/3536874376_8faa3e977e_b.jpg]
 
+-- [photos/3536874376_8faa3e977e_b.jpg]
 Global objects
+
+# Explain that interfaces are implemented by objects.
+# Explain how compositors advertise objects implementing interfaces to
+# clients
+# - global objects that get advertised via events when a client first connects
 
 # A wayland compositor has a collection of global objects. The global
 # objects are used to handle toplevel events and requests between the
@@ -435,6 +425,23 @@ Global objects
 The rendering architecture...
 # *** NEIL ***
 #
+#
+-- [stage-color=black] [surface-create.svg] [bottom-left]
+-- [stage-color=black] [surface-create0.svg] [bottom-left]
+-- [stage-color=black] [surface-create10.svg] [bottom-left]
+-- [stage-color=black] [surface-create20.svg] [bottom-left]
+-- [stage-color=black] [surface-create30.svg] [bottom-left]
+-- [stage-color=black] [surface-create40.svg] [bottom-left]
+-- [stage-color=black] [surface-create50.svg] [bottom-left]
+-- [stage-color=black] [surface-create60.svg] [bottom-left]
+-- [stage-color=black] [surface-create70.svg] [bottom-left]
+-- [stage-color=black] [surface-create80.svg] [bottom-left]
+-- [stage-color=black] [surface-create90.svg] [bottom-left]
+-- [stage-color=black] [surface-create100.svg] [bottom-left]
+
+-- [stage-color=black] [sync-frame.svg] [bottom-left]
+
+
 -- [photos/depot.jpg]
 SHM buffers
 
