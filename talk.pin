@@ -133,11 +133,6 @@
 #
 # XWayland 5min
 #   Intro
-#	- Headless X server
-#	- Wayland client
-#	- Supports DRI2
-#	- Mirrors its XRandR state based on wayland Outputs
-#	- Creates a wayland surface for every top level X window
 #
 #
 # Gnome Shell 5min
@@ -173,6 +168,20 @@ Adapting Gnome Shell into a Wayland Compositor
 <span color="#909090">Robert Bragg, Neil Roberts</span>
 
 # *** ROB ***
+#
+# Hi
+# - Aim: introduce from compositor pov, ref Rob Bradford
+# - Introduce Neil and self
+# - Back in February... demonstrate conversion of mature X11 compositor
+# - Thinking from a product pov
+# - (Just so you know, Dawati Shell = Netbook compositor we developed at Intel
+#    which originally lead to the development of Mutter)
+# - Were successfull adapting Dawati, therefore wanted to adapt Gnome Shell
+# - Explain what involved in compositor
+#	- Basic architecture
+#	- Components
+#	- Rendering architecture in more detail
+# - Proviso
 #
 # Ok, Hi everyone.
 #
@@ -251,6 +260,8 @@ Adapting Gnome Shell into a Wayland Compositor
 The current X
 architecture
 
+# *** NEIL ***
+#
 # The main thing to point out here is that the X architecture requires
 # us to put the compositor into a separate process.
 
@@ -294,29 +305,12 @@ Demo
 -- [photos/1346915953_edab99dab8_b.jpg]
 libwayland-server
 
+# *** ROBERT***
+# 
 #Explain that this lib provides just the protocol marshaling stuff +
 #some utils for dealing with input grabs, data device,
 
 #Note: there's nothing specific to the rendering architecture here
-
--- [photos/1346915953_edab99dab8_b.jpg]
-Clients in their own world
-
-# Explain that client surfaces all have a private coordinate space and
-# its not possible to discover the surfaces of other clients like you
-# can under X.
-#
-# This makes the compositor more free to place windows wherever it
-# wants and apply whatever transformations it likes without having to
-# describe those transformations to the clients
-
--- [photos/1346915953_edab99dab8_b.jpg]
-Clients are King
-
-# Anything that's not a shared resource is handled in the client:
-# - rendering,
-# - client side decorations
-# - keyboard maps / interpreting keyboard events
 
 -- [photos/3536874376_8faa3e977e_b.jpg]
 How a compositor looks..
@@ -423,365 +417,25 @@ Global objects
 
 -- [photos/depot.jpg]
 The rendering architecture...
-# *** NEIL ***
+# *** ROBERT ***
 #
 #
--- [stage-color=black] [surface-create.svg] [bottom-left]
--- [stage-color=black] [surface-create0.svg] [bottom-left]
--- [stage-color=black] [surface-create10.svg] [bottom-left]
--- [stage-color=black] [surface-create20.svg] [bottom-left]
--- [stage-color=black] [surface-create30.svg] [bottom-left]
--- [stage-color=black] [surface-create40.svg] [bottom-left]
--- [stage-color=black] [surface-create50.svg] [bottom-left]
--- [stage-color=black] [surface-create60.svg] [bottom-left]
--- [stage-color=black] [surface-create70.svg] [bottom-left]
--- [stage-color=black] [surface-create80.svg] [bottom-left]
--- [stage-color=black] [surface-create90.svg] [bottom-left]
--- [stage-color=black] [surface-create100.svg] [bottom-left]
-
--- [stage-color=black] [sync-frame.svg] [bottom-left]
-
+-- [stage-color=black] [render-architecture-simplified800.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified810.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified820.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified830.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified840.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified850.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified860.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified870.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified880.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified890.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified900.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified1000.png] [bottom-left]
+-- [stage-color=black] [render-architecture-simplified1100.png] [bottom-left]
 
 -- [photos/depot.jpg]
-SHM buffers
-
-# This is a simple mechanism for sharing buffers
-#
-# This client can directly render into the system-mapped memory using
-# a software rendering library such as Cairo.
-#
-# This should probably be avoided by clients because it requires a
-# copy from the shared memory to a texture in the compositor.
--- [photos/depot.jpg]
-EGL
-
-# EGL is a platform independent window system API
-#
-# It is used to create a GL or GLES context and bind into to a window
-# or offscreen buffer.
-#
-# It can be considered a replacement for GLX.
--- [photos/depot.jpg]
-eglCreateDisplay(NativeDisplayType display)
-eglCreateWindowSurface(EGLNativeWindowType)
-
-# These two functions are platform-independent but take a point to a
-# native type. They are effectively void* pointers that the EGL
-# implementation interprets how it likes.
-#
-# For example, to create an EGL display you have to pass it a
-# NativeDisplayType. This is a platform specific pointer representing
-# the display. Eg, for X it could be the X Display* pointer. It is up
-# to the EGL implementation to interpret this pointer correctly.
-#
-# So for the second function on X we'd pass an Xlib Window.
-
--- [bottom] [egl-in-wayland.png]
-EGL in Wayland
-
-# Both client and compositor link to EGL.
-#
-# It is up to the implementation for how it passes buffers between
-# client and compositor. It can define whatever internal extensions
-# needed.
-#
-# In Mesa it will create a wl_drm global interface for the client to use.
-
--- [photos/depot.jpg]
-EGL in Clients...
-
-# The EGL implementation has to have specific support to interpret
-# EGLNativeDisplayType and EGLNativeWindowType as wayland types.
-# The client would then do the following:
--- [font=45px] [photos/depot.jpg]
-eglCreateDisplay(NativeDisplayType display)
-
-# To start we need to get a pointer to pass here.
-
--- [photos/depot.jpg]
-<i>Create a wayland display object</i>
-
-<tt>
-<span color="#00CDCD">struct</span> <span color="#00CD00">wl_displa</span><span color="#00CD00">y</span> *<span color="#CDCD00">display</span> =
-  wl_display_connect (<span color="#CD00CD">NULL</span>);
-</tt>
-
-# This returns an object representing the connection on the socket to
-# the Wayland display server. This can be considered an equivalent to
-# the Display* pointer in X.
--- [font=28px] [photos/depot.jpg]
-<i>Bind to the wl_compositor interface</i>
-<tt>
-  <span color="#00CDCD">if</span> (strcmp(interface, <span color="#00CD00">&quot;wl_compositor&quot;</span>) == 0)
-    d->compositor =
-      wl_display_bind(display, id,
-                      &amp;wl_compositor_interface);
-</tt>
-
-# The client needs a handle to represent the compositor's global
-# wl_compositor interface. It can get this by handle the 'global'
-# event on the wl_display interface and then binding the object as
-# shown.
--- [photos/depot.jpg]
-wl_compositor::create_surface
-
-# This is a method on the compositor's wl_compositor object to create
-# a surface. The client generates an ID for the surface.
--- [font=35px] [photos/depot.jpg]
-eglCreateWindowSurface(EGLNativeWindowType)
-
-# This is the EGL function to create a surface.
-#
-# We need to fill in a native 
-# Once the client has a wl_egl_window* pointer it can pass that to
-# EGL as the native window type to create a regular EGL surface.
-#
-# The surface can then be used with eglMakeCurrent to bind the GL context.
-# From then on the application can just use regular GL or GLES.
---[font=28px] [photos/depot.jpg]
-<i>libwayland-egl:</i>
-
-<tt>
-<span color="#00CDCD">struct</span> <span color="#00CD00">wl_egl_windo</span><span color="#00CD00">w</span> *
-<span color="#8080FF">wl_egl_window_create</span>(<span color="#00CDCD">struct</span> <span color="#00CD00">wl_surface</span> *<span color="#CDCD00">surface</span>,
-                     <span color="#00CD00">int</span> <span color="#CDCD00">width</span>,
-                     <span color="#00CD00">int</span> <span color="#CDCD00">height</span>);
-</tt>
-
-# libwayland-egl is some wayland-specific functions in the EGL implementation
-# This function is used to create a structure which combines a size with a
-# wayland surface.
--- [photos/depot.jpg]
-EGL in the Compositor
-
-# On the compositor side the compositor can use whatever EGL platform
-# it likes. For example it could use an X display and an X window as a
-# surface to create a compositor that is nested under X. However the
-# EGL implementation has to implement this one extension...
--- [photos/depot.jpg]
-EGL_WL_bind_wayland_display
-# ... this extension contains one function...
--- [font=Monospace 20px] [photos/depot.jpg]
-eglBindWaylandDisplayWL()
-
-# ... The compositor must call this to tell the EGL implementation
-# that it should accept buffers passed in from clients. How this works
-# is up to the implementation but in Mesa it will register a global
-# object with the wl_drm interface.
-
--- [photos/2889657735_5234d83de4_b.jpg]
-Implementing some interfaces...
-# *** ROB ***
-#
-# Say that we'll go though some of the key interfaces involved in writing a
-# compositor and give a taster of how we implement these...
-
--- [photos/2889657735_5234d83de4_b.jpg]
-Wayland outputs
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_output</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
-    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">subpixel</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
-    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">geometry</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
-    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">mode</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
-    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">mode</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
-  &lt;/<span color="#8080FF">interface</span>>
-
-# Note that this interface is stripped to just give an outline of what it deals
-# with
-
--- [photos/2889657735_5234d83de4_b.jpg]
-Handling Output Binding..
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">struct</span> <span color="#00CD00">wl_resourc</span><span color="#00CD00">e</span> *<span color="#CDCD00">resource</span> =
-  wl_client_add_object (client, &amp;wl_output_interface, <span color="#CD00CD">NULL</span>, id, data);
-
-wl_resource_post_event (resource,
-			WL_OUTPUT_GEOMETRY,
-			output->x, output->y,
-			output->width_mm,
-			output->height_mm,
-			0, <span color="#CDCD00">/* </span><span color="#CDCD00">subpixel: unknown </span><span color="#CDCD00">*/</span>
-			<span color="#00CD00">&quot;unknown&quot;</span>, <span color="#CDCD00">/* </span><span color="#CDCD00">make </span><span color="#CDCD00">*/</span>
-			<span color="#00CD00">&quot;unknown&quot;</span>); <span color="#CDCD00">/</span><span color="#CDCD00">* </span><span color="#CDCD00">model </span><span color="#CDCD00">*/</span>
-
-<span color="#CDCD00">wl_list_for_each</span> (mode, &amp;output->mode_list, link) {
-      wl_resource_post_event(resource,
-			     WL_OUTPUT_MODE,
-			     mode->flags,
-			     mode->width,
-			     mode->height,
-			     mode->refresh);
-}
-
-# Explain that this is an example of what might be done in the compositors bind
-# callback function to immediately respond to a binding by sending the client
-# an event describing the output's geometry.
-#
-# Instead of just sending "unknown" for the make and model though a compositor
-# will use some other api like KMS to query more meaningful names.
-
--- [photos/2889657735_5234d83de4_b.jpg]
-The Compositor object
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_compositor</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">create_surface</span><span color="#00CD00">&quot;</span>>
-      &lt;<span color="#8080FF">arg</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">id</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">new_id</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">interface</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span>/>
-    &lt;/<span color="#8080FF">request</span>>
-  &lt;/<span color="#8080FF">interface</span>>
-
-# Remember to note that the xml snippet is a pseudo description
-
-# Explain that this interface is used by clients to create new surfaces
-#
-
--- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
-                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
-                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
-{
-  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
-  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
-
-  surface->compositor = compositor;
-
-  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
-  surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
-  surface->wl_surface.resource.object.implementation =
-          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
-  surface->wl_surface.resource.data = surface;
-
-  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
-
-  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
-}
-
--- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
-                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
-                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
-{
-  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
-  <span background="#ff0000">MySurface *surface = g_slice_new0 (MySurface);</span>
-
-  surface->compositor = compositor;
-
-  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
-  surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
-  surface->wl_surface.resource.object.implementation =
-          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
-  surface->wl_surface.resource.data = surface;
-
-  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
-
-  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
-}
-
--- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
-                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
-                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
-{
-  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
-  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
-
-  surface->compositor = compositor;
-
-<span background="#ff0000">  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
-  surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
-  surface->wl_surface.resource.object.implementation =
-          (void (**)(void)) &amp;my_surface_interface;
-  surface->wl_surface.resource.data = surface;</span>
-
-  wl_client_add_resource (client, &amp;surface->wl_surface.resource);
-
-  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
-}
-
--- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">compositor_create_surface</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">client</span>,
-                           <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">compositor_resource</span>,
-                           <span color="#00CD00">guint32</span> <span color="#CDCD00">id</span>)
-{
-  <span color="#00CD00">MyComposito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = compositor_resource->data;
-  <span color="#00CD00">MySurfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = g_slice_new0 (MySurface);
-
-  surface->compositor = compositor;
-
-  surface->wl_surface.resource.destroy = my_surface_resource_destroy_cb;
-  surface->wl_surface.resource.object.id = id;
-  surface->wl_surface.resource.object.interface = &amp;wl_surface_interface;
-  surface->wl_surface.resource.object.implementation =
-          (<span color="#00CD00">void</span> (**)(<span color="#00CD00">void</span>)) &amp;my_surface_interface;
-  surface->wl_surface.resource.data = surface;
-
-  <span background="#ff0000">wl_client_add_resource (client, &amp;surface->wl_surface.resource);</span>
-
-  compositor->surfaces = g_list_prepend (compositor->surfaces, surface);
-}
-
-
---  [photos/2889657735_5234d83de4_b.jpg]
-The wl_surface interface
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">destroy</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">type</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">destructor</span><span color="#00CD00">&quot;</span>/>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">attach</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">damage</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">frame</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-  &lt;/<span color="#8080FF">interface</span>>
-
--- [photos/depot.jpg]
-Handling buffer attach requests
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-<i>Handling a buffer attach from a client</i>
-<tt>
-<span color="#00CDCD">static</span> <span color="#00CD00">voi</span><span color="#00CD00">d</span>
-<span color="#8080FF">my_surface_attach_buffer</span> (<span color="#00CDCD">struct</span> <span color="#00CD00">wl_client</span> *<span color="#CDCD00">wayland_client</span>,
-                          <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">surface_resource</span>,
-                          <span color="#00CDCD">struct</span> <span color="#00CD00">wl_resource</span> *<span color="#CDCD00">buffer_resource</span>,
-                          <span color="#00CD00">gint32</span> <span color="#CDCD00">dx</span>, <span color="#00CD00">gint32</span> <span color="#CDCD00">dy</span>)
-{
- <span color="#00CDCD">struct</span> <span color="#00CD00">my_surfac</span><span color="#00CD00">e</span> *<span color="#CDCD00">surface</span> = surface_resource->data;
- <span color="#00CDCD">struct</span> <span color="#00CD00">my_composito</span><span color="#00CD00">r</span> *<span color="#CDCD00">compositor</span> = surface->compositor;
- <span color="#00CDCD">struct</span> <span color="#00CD00">wl_buffe</span><span color="#00CD00">r</span> *<span color="#CDCD00">buffer</span> = buffer_resource->data;
-
- <span color="#00CD00">EGLImag</span><span color="#00CD00">e</span> <span color="#CDCD00">image</span> = eglCreateImageKHR (compositor->display, <span color="#CD00CD">NULL</span>,
-                                     EGL_WAYLAND_BUFFER_WL,
-                                     buffer, <span color="#CD00CD">NULL</span>);
-
- <span color="#00CD00">GLuin</span><span color="#00CD00">t</span> <span color="#CDCD00">tex</span>;
- glGenTextures (1, &amp;tex);
- glBindTexture (GL_TETURE_2D, tex);
- glEGLImageTargetTexture2DOES (GL_TEXTURE_2D, image);
-
- eglDestroyImageKHR (compositor->display, image);
-
- surface->texture = tex;
-}
-</tt>
-
-# This request is made whenever the client has finished rendering a
-# frame to pass the new buffer to the server. The client
-# implementation of EGL will use this request whenever eglSwapBuffers
-# is called.
-#
-# In the Cogland example we use a function from the Cogl API to
-# convert the buffer to a texture.
-
--- [photos/2889657735_5234d83de4_b.jpg]
-Frame callbacks
+Synchronized Clients
 
 # With current X compositors it can be quite difficult to synchronize
 # rendering clients with the redraw of the compositor.
@@ -801,26 +455,6 @@ Frame callbacks
 # using the wl_surface::frame request.
 #
 # This can make a big power saving.
-
--- [photos/2889657735_5234d83de4_b.jpg] [font=25px]
-<i>Post frame callback-done events on paint</i>
-<tt>
-  <span color="#00CDCD">while</span> (!g_queue_is_empty (&amp;compositor->frame_callbacks))
-    {
-      <span color="#00CD00">CoglandFrameCallbac</span><span color="#00CD00">k</span> *<span color="#CDCD00">callback</span> =
-        g_queue_peek_head (&amp;compositor->frame_callbacks);
-
-      wl_resource_post_event (&amp;callback->resource,
-                              WL_CALLBACK_DONE, get_time ());
-      wl_resource_destroy (&amp;callback->resource, 0);
-    }
-</tt>
-
-# This code posts an event on the resource belonging to the callback
-# registered for the notification.
-#
-# The resource is then automatically destroyed. This is part of the
-# contract of the callback interface.
 
 -- [photos/2889657735_5234d83de4_b.jpg]
 The wl_shell and wl_shell_surface interface
@@ -906,95 +540,11 @@ xwayland
 #
 # Introduce that the compositor is responsible for starting an X
 # wayland server for X clients to connect too.
-
--- [photos/bridge.jpg]
-Starting X Wayland lazily...
-
-# Introduce the idea of loading X wayland lazily only when we have X
-# clients that require an xserver for compatibility.
-# 
-#
-
--- [photos/bridge.jpg]
-Create a lock file
-
-# This is just a case of iterating though the display number space
-# looking for a free display number so we can open a free
-# /tmp/.X11-lock file (checking existing lock files to see if they are
-# stale) before we go ahead and open a unix domain socket.
-
--- [photos/bridge.jpg]
-Open a unix domain socket
-
-# Once we have found a free display number we can create a corresponding
-# /tmp/.X11-unix/X? unix domain socket for X clients to connect too.
-#
-# We can immediately mark the socket as a passive, listening socket via
-# listen(2)
-
--- [photos/bridge.jpg]
-Poll for the socket to be readable
-
-# Now we can poll until an x client tries to connect to the X domain socket
-
--- [photos/bridge.jpg]
-socketpair() for wayland protocol before fork()
-
-# Explain that we want xwayland to be a wayland client so we want to establish
-# a socket connection between the compositor and xwayland.
-#
-# We create a socketpair() just before fork()ing to run xwayland so
-# that we can give one end of the pair to xwayland. We use an
-# "WAYLAND_SOCKET" environment variable to convey the file descriptor
-# to xwayland.
-
--- [photos/bridge.jpg]
-fork() xwayland
-
--- [photos/bridge.jpg]
-Wait for "xserver" binding
-
-# Once we know that xwayland has bound the "xserver" interface then we
-# know that the server is initialized and we can also start sending
-# events.
-
--- [photos/bridge.jpg]
-Pass listen socket to xwayland
-
-# So that xwayland can deal with actually accept()ing the new client
-# connection and also handling further client connections the file
-# descriptor for the unix domain socket is passed over the wayland
-# protocol to xwayland.
-
-# The file descriptor is sent using the "listen_socket" event
-# described in the xserver.xml wayland protocol.
-
--- [font=Monospace 20px] [photos/bridge.jpg]
-wl_client_flush (xwayland_client)
-
-# A detail to be careful about is that you flush the wayland events
-# passing the listen socket to xwayland to avoid a deadlock when
-# trying connecting to xwayland as an X client to become the window
-# manager.
-
--- [photos/bridge.jpg]
-Connect as window manager
-
-# At this point the compositor now becomes a window manager for xwayland
-# clients.
-
--- [text-align=center] [photos/bridge.jpg]
-Pair surfaces &amp; windows according
-to "set_window_id" requests.
-
-# Once xwayland is initialized we can now expect "create_surface"
-# requests to the wl_compositor object that correspond to top level X
-# windows.
-#
-# We can also expect "set_window_id" events over the wayland protocol
-# to inform us about which X Window corresponds to a given xwayland
-# surface.
-
+# - Headless X server
+# - Wayland client
+# - Supports DRI2
+# - Mirrors its XRandR state based on wayland Outputs
+# - Creates a wayland surface for every top level X window
 
 -- [photos/bridge.jpg]
 Caveats...
@@ -1109,45 +659,6 @@ TODO
 
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
-
--- [photos/5338839892_7f8d2535ed_b.jpg] [font=40px] [text-align=center]
-<span size="large"><b>Weston</b></span>
-
-<tt>git://anongit.freedesktop.org/wayland/weston</tt>
-
-# The demo compositor for Wayland
-#
-# It's heading towards being a complete usable standalone compositor.
-#
-# This is kept up-to-date with all the latest Wayland protocol changes
-# so it's a very useful example implementation. Much of the code for
-# our Mutter hybrid compositor work borrows code from Weston.
--- [photos/5338839892_7f8d2535ed_b.jpg] [font=30px]
-<span size="large"><b>Links</b></span>
-
-Cogland
-<tt>git://git.gnome.org/cogl</tt>
-
-
-test-wayland-surface (the small Clutter compositor)
-<tt>http://github.com/clutter-project/test-wayland-surface</tt>
-
-Our latest work is on the ‘fosdem-2012’ branches for both
-
-Mutter
-<tt>git://git.gnome.org/mutter</tt>
-on the wip/wayland branch
-
-Mesa gbm patches
-<tt>git://anongit.freedesktop.org/~rib/mesa</tt>
-
-A QT compositor
-<tt>git://gitorious.org/qt-labs/qt-compositor.git</tt>
--- [photos/5338839892_7f8d2535ed_b.jpg]
-\#wayland on irc.freenode.net
-
--- [photos/5968108862_d5240a042b_b.jpg] [bottom] [font=80px]
-DEMO
 
 --[font=18px]
 Attributions
