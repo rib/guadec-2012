@@ -257,6 +257,9 @@ Gnome Shell as a Wayland Compositor
 # - Maybe say something about the backgrounds
 #
 
+-- [photos/2889678711_50c3e81405_b.jpg]
+Wayland architecture
+
 -- [stage-color=black] [xarch.png] [bottom-right]
 The current X
 architecture
