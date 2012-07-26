@@ -165,8 +165,8 @@
 # 
 
 -- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
-Adapting Gnome Shell into a Wayland Compositor
-<span color="#909090">Robert Bragg, Neil Roberts</span>
+Gnome Shell as a Wayland Compositor
+<span color="#909090">Robert Bragg &amp; Neil Roberts</span>
 
 # *** ROB ***
 #
@@ -295,37 +295,37 @@ architecture
 Demo
 # be SUPER careful !!!!! but also quick!!
 #
-# Re-iterate that we are showing gnome-shell directly controlling the display
-# hardware and also directly getting input events from the evdev interface.
+# Continuity note:
+# - Audience understands what a Wayland Compositor is now
+# 
+# Re-iterate:
+# - Gnome Shell now in direct control of the display hardware
+# - Gnome Shell now directly handling the input hardware (From Evdev)
 #
 # Unfullscreen pinpoint
 # load a Weston terminal
 # Show stacking - could say something about this
 # Show moving the terminal to a different workspace
 
--- [photos/1346915953_edab99dab8_b.jpg]
-libwayland-server
-
-# *** ROBERT***
-# 
-#Explain that this lib provides just the protocol marshaling stuff +
-#some utils for dealing with input grabs, data device,
-
-#Note: there's nothing specific to the rendering architecture here
-
 -- [photos/3536874376_8faa3e977e_b.jpg]
-How a compositor looks..
+The Wayland Protocol...
+
 # *** ROB ***
 #
-# We're going to run through the basic design and components of a
-# Wayland compositor...
+# So we can start to delve into what a compositor has to handle we first
+# need to understand a bit about the wayland protocol.
+#
+# So now I'm going to quickly explain how the protocol is structured so
+# we can give some examples of what the compositor needs to support.
 
 -- [photos/3536874376_8faa3e977e_b.jpg]
 Interfaces, Events &amp; Requests
 
 # All interactions over the wayland protocol happen according to
 # interfaces that are declared in XML
-
+#
+# - Extensible
+# - No synchronous replies
 
 -- [font=Monospace 20px] [photos/3536874376_8faa3e977e_b.jpg]
 &lt;<span color="#8080FF">protocol</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">xserver</span><span color="#00CD00">&quot;</span>>
@@ -346,6 +346,16 @@ Interfaces, Events &amp; Requests
   &lt;/<span color="#8080FF">interface</span>>
 
 &lt;/<span color="#8080FF">protocol</span>>
+
+-- [photos/1346915953_edab99dab8_b.jpg]
+libwayland-server
+
+# *** ROBERT***
+# 
+# - Protocol marshaling
+# - A few utilities too e.g. for handling input grabs
+# - Nothing to do with rendering
+
 
 # Don't worry about the details of what this particular interface is for.
 #
@@ -451,7 +461,7 @@ interfaces
 # to the EWMH spec from X.
 
 -- [photos/depot.jpg]
-The rendering architecture...
+The rendering protocol...
 # *** ROBERT ***
 #
 #
@@ -570,46 +580,12 @@ xwayland
 # - Wayland client
 # - Supports DRI2
 # - Mirrors its XRandR state based on wayland Outputs
+#   - Ensures that X11 dialog and menu pop-ups work correctly
 # - Creates a wayland surface for every top level X window
 
--- [photos/bridge.jpg]
-Caveats...
-
--- [photos/bridge.jpg] [font=40px]
-Unsynchronized X and wayland protocols
-
-# Beware of having separate X and wayland command streams. If a
-# wayland surface for an x client is destroyed you might want to know
-# if the window was just unmapped or really destroyed which is
-# something you learn from the X protocol so now your in the awkward
-# situation of having to match corresponding events in each stream.
-#
-# Perhaps at some point it could be better to proxy one protocol over the other
-# so we know things are synchronized but for now at least we've found that
-# consistently making sure to process X events before wayland events works OK
-#FIXME more...
-
--- [photos/bridge.jpg] [font=40px]
-Beware about forwarding mouse input
-
-# This problem mostly just applies to porting X compositors to be
-# hybrid compositor since they will expect to handle X motion events
-# e.g. for moving windows. Compositors should only handle mouse events
-# coming directly into the compositor (e.g. from evdev) because it's
-# not reliable to feed events to xwayland and rely on them being
-# reported back via X and being consistent with the current composited
-# position of a window.
-
--- [photos/bridge.jpg]
-Sync X windows position to screen
-
-# Keep X window positions in synch with composited position if want
-# you want X toolkit menus to behave correctly.
-#
-# xwayland synchronizes its xrandr state according the wayland
-# compositor outputs and X toolkits use the xrandr state to ensure
-# they don't position pop up menus offscreen or crossing over multiple
-# screens.
+# - Separate protocol steams?
+#   - (We always handle X events first and that seems to work for us)
+# - Beware about forwarding mouse input
 
 -- [photos/bridge.jpg]
 Gnome Shell
