@@ -8,6 +8,7 @@
 # libwayland-server 0.5 - Robert TODO
 # interfaces, events, requests (In XML terms) 3min TODO
 # global objects 3min - Neil
+# shell surface 2min - ?
 # rendering architecture 4min - Robert TODO
 # frame callbacks 2min - Robert TODO
 # gbm, kms, tty = 5min - Neil
@@ -415,6 +416,36 @@ Global objects
 # create a wayland buffer given an allocated DRM buffer handle. This
 # is how the results of rendering are passed to the compositor.
 
+-- [photos/2889657735_5234d83de4_b.jpg] [font=40px] [text-align=center]
+The <b><span font="Monospace">wl_shell</span></b> and <b><span font="Monospace">wl_shell_surface</span></b>
+interfaces
+
+# wl_shell is a global object for getting a wl_shell for a surface
+
+# a wl_shell is...
+
+-- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
+&lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">move</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_toplevel</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_transient</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_fullscreen</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">fullscreen_method</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_popup</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_maximized</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_title</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_class</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">ping</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+  &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">pong</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
+  &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">configure</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+  &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">popup_done</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
+&lt;/<span color="#8080FF">interface</span>>
+
+# As you can see, the wl_shell has the typical types of requests a
+# client might want to do for managing its window. This is equivalent
+# to the EWMH spec from X.
+
 -- [photos/depot.jpg]
 The rendering architecture...
 # *** ROBERT ***
@@ -455,25 +486,6 @@ Synchronized Clients
 # using the wl_surface::frame request.
 #
 # This can make a big power saving.
-
--- [photos/2889657735_5234d83de4_b.jpg]
-The wl_shell and wl_shell_surface interface
-
-# Just skim over the "wl_shell" interface only saying that it has a
-# "get_shell_surface" request that's given a wl_surface id.
-
--- [font=Monospace 20px] [photos/2889657735_5234d83de4_b.jpg]
-  &lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_shell_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">move</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">enum</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">enum</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_toplevel</span><span color="#00CD00">&quot;</span>/>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_transient</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_fullscreen</span><span color="#00CD00">&quot;</span>/>
-    &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_popup</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
-    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">configure</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">event</span>>
-    &lt;<span color="#8080FF">event</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">popup_done</span><span color="#00CD00">&quot;</span>/>
-  &lt;/<span color="#8080FF">interface</span>>
 
 # Explain that the wl_shell_surface interface provides some higher level
 # requests that start to relate to the varying policies of the windowing
