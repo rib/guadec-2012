@@ -393,7 +393,11 @@ Global objects
 # A seat represents a collection of input devices such as a keyboard
 # and mouse pair. The compositor can advertise multiple seats.
 #
-# The seat object will send events to clients that bind the object.
+# The client can use this interface to query the capabilities of the
+# seat such as does it have a mouse and keyboard or touch events.
+#
+# There are also requests to retrieve resources for those input
+# devices. From there the client can receive input events.
 
 -- [stage-color=black] [global-objects20.svg] [bottom-left]
 
