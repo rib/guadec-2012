@@ -530,7 +530,17 @@ Kernel Mode Setting
 #
 # Data flows from the CRTC to the encoder to the connector.
 #
-# You can use the library to pick and configure the CRTC,encoder and connector.
+# CRTC represents a chip that can scanout from a buffer. This is what
+# you attach the buffer to.
+#
+# The encoder takes the pixel data from the CRTC and converts it to a
+# format suitable for a connector.
+#
+# The connector represents the physical socket where a display is
+# plugged in.
+#
+# You can use the library to pick and configure the CRTC, encoder and
+# connector.
 #
 # Cogl has a backend to do most of the work in setting up GBM buffers
 # and handling KMS.
