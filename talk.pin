@@ -2,18 +2,18 @@
 [duration=40] [black] [shading-opacity=1.0] [transition=fade-fast]
 
 
-# intro 3 min - Robert
+# intro 3 min - Robert TODO
 # architecture overview 2 - Neil
 # demo 2
-# libwayland-server 0.5 - Robert
-# interfaces, events, requests (In XML terms) 3min
+# libwayland-server 0.5 - Robert TODO
+# interfaces, events, requests (In XML terms) 3min TODO
 # global objects 3min - Neil
-# rendering architecture 4min - Robert
-# frame callbacks 2min - Robert
+# rendering architecture 4min - Robert TODO
+# frame callbacks 2min - Robert TODO
 # gbm, kms, tty = 5min - Neil
-# xwayland 4.5min - Robert
+# xwayland 4.5min - Robert TODO
 # gnome shell 4min - Neil
-# todo 2min - Robert
+# todo 2min - Robert TODO
 
 
 #
@@ -174,6 +174,21 @@
 -- [stage-color=black] [global-objects20.svg] [bottom-left]
 -- [stage-color=black] [global-objects30.svg] [bottom-left]
 
+-- [stage-color=black] [surface-create.svg] [bottom-left]
+-- [stage-color=black] [surface-create0.svg] [bottom-left]
+-- [stage-color=black] [surface-create10.svg] [bottom-left]
+-- [stage-color=black] [surface-create20.svg] [bottom-left]
+-- [stage-color=black] [surface-create30.svg] [bottom-left]
+-- [stage-color=black] [surface-create40.svg] [bottom-left]
+-- [stage-color=black] [surface-create50.svg] [bottom-left]
+-- [stage-color=black] [surface-create60.svg] [bottom-left]
+-- [stage-color=black] [surface-create70.svg] [bottom-left]
+-- [stage-color=black] [surface-create80.svg] [bottom-left]
+-- [stage-color=black] [surface-create90.svg] [bottom-left]
+-- [stage-color=black] [surface-create100.svg] [bottom-left]
+
+-- [stage-color=black] [sync-frame.svg] [bottom-left]
+
 -- [text-align=center] [photos/2889678711_50c3e81405_b.jpg]
 Adapting Gnome Shell into a Wayland Compositor
 <span color="#909090">Robert Bragg, Neil Roberts</span>
@@ -191,24 +206,37 @@ Adapting Gnome Shell into a Wayland Compositor
 # maintain the Cogl 3D graphics API used by Clutter and we've also both done a
 # fair of work on Clutter itself. 
 #
-# Back in February of this year we did spend some time developing several Wayland
-# compositors, each with an increasing level of complexity as we learned what
-# was involved. We were particularly interested in being able to demonstrate
-# that it was possible to adapt an existing mature X11 compositor to become a
-# hybrid Wayland compositor so that we could have an incremental path for
-# adapting our existing Netbook compositor into a Wayland compositor.
+# Back in February of this year we both spent some time developing several
+# Wayland compositors, each with an increasing level of complexity as we
+# learned what was involved. We were particularly interested in being able to
+# demonstrate that it was possible to adapt an existing mature X11 compositor
+# into a hybrid X11 and Wayland compositor so that we could have an incremental
+# path for adapting our Netbook compositor into a Wayland compositor.
 #
-# The Netbook compositor we were working with, called Dawati Shell, is a mutter
-# based compositor like Gnome Shell and since we were ultimately successful in
-# being able to adapt Dawati Shell into a hybrid compositor it seemed only
-# natural that we also try and adapt Gnome Shell as a demonstration that that's
-# also possible and show that moving from X11 to Wayland doesn't necessarily
-# mean throwing the baby out with the bath water and re-writing everything from
-# scratch. We were looking at things from a product point of view where it
-# would not have been acceptable to regress the existing compositor functionality
-# we had developed up 'till date. We wanted start bringing in some advantages
-# of the Wayland architecture and define an incremental way of pushing Wayland
-# forward to the level where it could replace the need for X11 entirely.
+# Thinking from a product development point of view, we had already developed a
+# lot of features in our X11 based compositor and we didn't want to regress
+# what we had developed to date but at the same time there are benefits to the
+# Wayland architecture so we'd like to make progress in migrating from X11 to
+# Wayland as soon as possible.
+#
+# (Just quickly, for those that don't know: Dawati Shell is a Netbook
+# compositor we developed at Intel which lead to the original development of
+# Mutter, based on Metacity.)
+#
+# We were ultimately successful in adapting our Dawati Shell into a hybrid X11
+# and Wayland compositor and so it seemed only natural that we should also try
+# to demonstrate that Gnome Shell could similarly be adapted into a Wayland
+# compositor too, since it's also based on Mutter.
+# 
+# The aim of this talk is to go into some detail about what's involved in
+# developing a Wayland compositor. We will try to lead through from a brief
+# explanation of the overall architecture compared to X11 (This should just
+# be a re-cap for those in Rob Bradfords talk), then explain a bit about the
+# components you'll find inside any Wayland compositor, and explain some details
+# of how the rendering architecture in particular looks inside the compositor.
+# Since we don't have much time today I'm afraid we won't really say much about
+# input or things such as copy and paste
+#
 #
 # So, the aim of this talk actually isn't just to talk about what we did to
 # make Gnome Shell work but instead to try and introduce, at a higher level,
