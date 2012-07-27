@@ -395,7 +395,7 @@ Global objects
 # objects are used to handle toplevel events and requests between the
 # compositor and the client.
 
--- [stage-color=black] [global-objects0.svg] [bottom-left]
+-- [stage-color=black] [global-objects0.png] [bottom-left]
 
 # The main object is the Display object. A client gets a pointer to
 # represent this object as soon as it connects.
@@ -407,12 +407,12 @@ Global objects
 # of the other global objects so that it bind any objects it is
 # interested in.
 
--- [stage-color=black] [global-objects1.svg] [bottom-left]
+-- [stage-color=black] [global-objects1.png] [bottom-left]
 
 # The Compositor object has a request to create new surfaces. The
 # surfaces are like windows in the X world.
 
--- [stage-color=black] [global-objects10.svg] [bottom-left]
+-- [stage-color=black] [global-objects10.png] [bottom-left]
 
 # A seat represents a collection of input devices such as a keyboard
 # and mouse pair. The compositor can advertise multiple seats.
@@ -423,7 +423,7 @@ Global objects
 # There are also requests to retrieve resources for those input
 # devices. From there the client can receive input events.
 
--- [stage-color=black] [global-objects20.svg] [bottom-left]
+-- [stage-color=black] [global-objects20.png] [bottom-left]
 
 # The output object represents part of the compositor geometry. This
 # is a rectangle within the compositor coordinate system. Typically
@@ -432,7 +432,7 @@ Global objects
 # The client listen for events on this object to learn about the
 # monitor configurations
 
--- [stage-color=black] [global-objects30.svg] [bottom-left]
+-- [stage-color=black] [global-objects30.png] [bottom-left]
 
 # As part of the rendering system, there will be a private global
 # object to handle requests to create buffers.
