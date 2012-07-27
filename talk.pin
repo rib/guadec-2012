@@ -579,6 +579,7 @@ xwayland
 #
 # Introduce that the compositor is responsible for starting an X
 # wayland server for X clients to connect too.
+#
 # - Headless X server
 # - Wayland client
 # - Supports DRI2
@@ -589,6 +590,25 @@ xwayland
 # - Separate protocol steams?
 #   - (We always handle X events first and that seems to work for us)
 # - Beware about forwarding mouse input
+#
+# XWayland is what makes our compositor into a "hybrid" X11 and Wayland
+# compositor. XWayland is a headless X server that is also a Wayland
+# Client too. It gives us an X server that we can run legacy apps against
+# and for every top-level X window XWayland will create a corresponding
+# Wayland surface too and inform the compositor what the associated
+# XID is via an extension protocol.
+#
+# XWayland handles proxying input events from the Wayland protocol to
+# the right XWindow, and also mirrors its internal XRandR state to match
+# the geometry of the Wayland compositor outputs. This means for example
+# that we can make X11 dialog and menu pop-ups continue to work as
+# expected with regards to popping up close to the edge of the screen
+# where toolkits will normally want to re-position them so they are fully
+# visible and don't cross-between monitors.
+#
+# XWayland also supports DRI2 so there should be no regression in
+# performance for X11 clients that depend on OpenGL for rendering.
+#
 
 -- [photos/bridge.jpg]
 Gnome Shell
