@@ -598,16 +598,12 @@ xwayland
 # Introduce that the compositor is responsible for starting an X
 # wayland server for X clients to connect too.
 #
-# - Headless X server
-# - Wayland client
-# - Supports DRI2
+# - Headless X server + Wayland client
+# - Creates a wayland surface for every top level X window
+# - Forwards wayland input to X clients
 # - Mirrors its XRandR state based on wayland Outputs
 #   - Ensures that X11 dialog and menu pop-ups work correctly
-# - Creates a wayland surface for every top level X window
-
-# - Separate protocol steams?
-#   - (We always handle X events first and that seems to work for us)
-# - Beware about forwarding mouse input
+# - Supports DRI2 so no regression for GL apps
 #
 # XWayland is what makes our compositor into a "hybrid" X11 and Wayland
 # compositor. XWayland is a headless X server that is also a Wayland
@@ -706,11 +702,28 @@ TODO
 # - Implement screen saver support
 # - Implement screen shot support
 # - Adapt the gnome-control-center display settings to talk directly with mutter
+# - More complete wl_shell_surface support
 # - Provide a way to run gnome shell without root privileges
+# - Potentially push to upstream our patches
+#   - Much of the Gnome Shell work unrelated to Wayland
+#	- E.g. remove GL usage
+#   - Mutter changes designed to not regress the X11 support and with
+#     most work self-contained under the Wayland source directory.
+#   - The most hairy change to core mutter was in adapting the stack
+#     tracker to handle interleaving Wayland surfaces with X windows
+#     in the stacking so it would need review and we'd need to give
+#     that a decent amount of testing time to be sure it doesn't
+#     cause any regressions in normal X11 only stacking.
+#
 
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
 
+# If you agree this is an interesting apprach:
+#   - checkout mutter: wip/wayland-kms
+#   - checkout gnome-shell: wip/wayland
+#   - hassle Neil and myself on irc #clutter (bpeel + rib)
+#   - 
 # If agreed that incrementally adapting gnome-shell could be a good
 # approach, then please try out the wip/wayland-kms branch of mutter
 # and wip/wayland branch of gnome-shell
