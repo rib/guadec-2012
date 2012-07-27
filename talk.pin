@@ -584,6 +584,8 @@ TTY
 -- [photos/bridge.jpg]
 xwayland
 
+-- [hybridarch.png]
+
 # *** ROB ***
 #
 # Introduce that X wayland is a means to support legacy X clients
