@@ -709,6 +709,18 @@ TODO
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
 
+# If agreed that incrementally adapting gnome-shell could be a good
+# approach, then please try out the wip/wayland-kms branch of mutter
+# and wip/wayland branch of gnome-shell
+#
+# Feel free to hassle us on #clutter
+# Adding support for the latest protocol could be a interesting first
+# thing to take a stab at; I don't think it would be too tricky.
+#
+
+-- [photos/5338839892_7f8d2535ed_b.jpg]
+Questions?
+
 --[font=18px]
 Attributions
 
