@@ -294,6 +294,17 @@ architecture
 # relative to the client's surface. The client can't discover
 # other surfaces or see events destined for surfaces of other clients.
 
+-- [stage-color=black] [hybridarch.png] [bottom-left]
+The new
+architecture
+
+# Wayland can also use a special X server called X wayland. This works
+# as a wayland client to allow X clients into the scene.
+#
+# This is what we're using to make Mutter a hybrid compositor
+#
+# More on this later
+
 --
 Demo
 # be SUPER careful !!!!! but also quick!!
