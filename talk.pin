@@ -417,10 +417,11 @@ Global objects
 # A seat represents a collection of input devices such as a keyboard
 # and mouse pair. The compositor can advertise multiple seats.
 #
-# The client can use this interface to query the capabilities of the
-# seat such as does it have a mouse and keyboard or touch events.
+# A client will be set events from this object to describe the
+# capabilities of the seat such as does it have a mouse and keyboard
+# or touch events.
 #
-# There are also requests to retrieve resources for those input
+# There are also requests to create resources for those input
 # devices. From there the client can receive input events.
 
 -- [stage-color=black] [global-objects20.png] [bottom-left]
@@ -538,11 +539,13 @@ Owning the display
 GBM
 generic / graphics buffer manager
 
-# GBM is a low-level API to allocate DRM buffers. They can then be
-# bound to EGL and rendered to using OpenGL without having to connect
-# to an X display. The buffers are allocated within Mesa so it will do
-# the right thing to allocate a buffer that can be directly scanned
-# out from.
+# GBM is a low-level API to allocate DRM buffers.
+#
+# Right format for rendering / scanning out - thanks to Mesa
+#
+# Can be used as an EGL surface type - no X
+#
+# Can be scanned out from
 
 -- [kms.png] [top] [font=50px] [text-align=center]
 KMS
@@ -630,8 +633,11 @@ Gnome Shell
 Gnome Shell
 <span font="30px">
 We've implemented most of the core things
-mentioned already. Code is available on the wip/wayland
-branches of Mutter and Gnome Shell</span>
+mentioned already.
+
+Branches:
+mutter → wip/wayland-kms
+gnome-shell → wip/wayland</span>
 
 # We've implemented most of the bits we've already mentioned as you saw
 # in the demo.
@@ -694,6 +700,11 @@ Gnome Shell
 
 -- [photos/waylnad-street.jpg] [bottom]
 TODO
+# - Update to the latest Wayland protocols
+# - Implement screen saver support
+# - Implement screen shot support
+# - Adapt the gnome-control-center display settings to talk directly with mutter
+# - Provide a way to run gnome shell without root privileges
 
 -- [photos/5338839892_7f8d2535ed_b.jpg]
 Where should you start?
