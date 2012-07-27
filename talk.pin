@@ -453,7 +453,7 @@ interfaces
 # a wl_shell is...
 
 -- [font=Monospace 30px] [photos/2889657735_5234d83de4_b.jpg]
-&lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
+&lt;<span color="#8080FF">interface</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">wl_shell_surface</span><span color="#00CD00">&quot;</span> <span color="#CDCD00">version</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">1</span><span color="#00CD00">&quot;</span>>
   &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">move</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
   &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">resize</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
   &lt;<span color="#8080FF">request</span> <span color="#CDCD00">name</span>=<span color="#00CD00">&quot;</span><span color="#00CD00">set_toplevel</span><span color="#00CD00">&quot;</span>> ... &lt;/<span color="#8080FF">request</span>>
