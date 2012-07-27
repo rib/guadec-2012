@@ -554,14 +554,16 @@ Kernel Mode Setting
 # KMS is "Kernel Mode Setting"
 #
 # It is a kernel interface used to control the display hardware.
+# • there is a library
 #
 # Data flows from the CRTC to the encoder to the connector.
 #
-# CRTC represents a chip that can scanout from a buffer. This is what
-# you attach the buffer to.
+# CRTC represents a chip that can scanout from a buffer.
+# • Use the API to point the CRTC to a bufer to scanout from.
 #
 # The encoder takes the pixel data from the CRTC and converts it to a
 # format suitable for a connector.
+# • Eg, encode for HDMI
 #
 # The connector represents the physical socket where a display is
 # plugged in.
